@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mandalay – Burmesische Küche in Köln, familiengeführt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&family=Noto+Sans+Myanmar:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBFAF5; --surface:#F1EEE3; --ink:#1E2A26; --muted:#59655F; --line:#D9D5C5;
+  --jade:#C23A1E; --jade-ink:#F6F1DF; --gold:#E3A512; --chili:#B3261E;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#121A17; --surface:#1A2420; --ink:#EFEBDD; --muted:#A5AFA8; --line:#2E3A35; --jade:#A82E18; --chili:#E5645B; color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#121A17; --surface:#1A2420; --ink:#EFEBDD; --muted:#A5AFA8; --line:#2E3A35; --jade:#A82E18; --chili:#E5645B; color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:"Young Serif",Georgia,serif;font-weight:400;line-height:1.1;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem}
+section{padding:5rem 0}
+
+/* Hero */
+.hero{background:var(--jade);color:var(--jade-ink);padding:1.25rem 0 5rem;position:relative;overflow:hidden}
+nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding-bottom:4rem}
+.logo{font-family:"Young Serif",serif;font-size:1.5rem;text-decoration:none}
+nav ul{display:flex;gap:1.5rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav a{text-decoration:none;font-weight:500}
+nav a:hover{color:var(--gold)}
+nav{position:relative}
+.burger{display:none;background:none;color:var(--jade-ink);border:2px solid var(--jade-ink);border-radius:.6rem;width:2.75rem;height:2.75rem;padding:0;cursor:pointer}
+.burger span{display:block;width:1.3rem;height:2px;background:currentColor;margin:.3rem auto;transition:transform .2s,opacity .2s}
+nav.open .burger span:nth-child(1){transform:translateY(calc(.6rem + 2px)) rotate(45deg)}
+nav.open .burger span:nth-child(2){opacity:0}
+nav.open .burger span:nth-child(3){transform:translateY(calc(-.6rem - 2px)) rotate(-45deg)}
+@media(max-width:1024px){
+  nav{flex-wrap:nowrap}
+  .burger{display:block}
+  nav ul{display:none;position:absolute;top:3.5rem;right:0;flex-direction:column;gap:0;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:1rem;padding:.5rem;min-width:13rem;z-index:5;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  nav.open ul{display:flex}
+  nav ul a{display:block;padding:.75rem 1rem;border-radius:.6rem}
+  nav ul a:hover{color:var(--ink);background:var(--surface)}
+}
+@media(prefers-reduced-motion:reduce){.burger span{transition:none}}
+.hero .wrap{position:relative;z-index:1}
+.mingalaba{font-family:"Noto Sans Myanmar",sans-serif;font-weight:500;font-size:clamp(1.25rem,3vw,1.6rem);color:var(--jade-ink);margin:0 0 .75rem}
+.hero h1{font-size:clamp(2.8rem,8vw,5.6rem);max-width:12ch}
+.hero p.lead{max-width:34rem;font-size:1.2rem;margin:1.5rem 0 2rem;color:var(--jade-ink);opacity:.92}
+.btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.85rem 1.5rem;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--gold)}
+.btn.primary{background:var(--gold);color:#1E2A26}
+.btn.primary:hover{background:#F0B72B}
+.btn.ghost{color:var(--jade-ink)}
+.btn.ghost:hover{background:rgba(255,255,255,.1)}
+.bowl{position:absolute;z-index:0;pointer-events:none;right:-8rem;bottom:-9rem;width:26rem;height:26rem;border-radius:50%;
+  background:radial-gradient(circle closest-side at 50% 50%,var(--jade) 0 27%,var(--gold) 27% 30%,var(--jade) 30% 40%,var(--chili) 40% 43%,var(--jade) 43% 54%,var(--gold) 54% 57%,var(--jade) 57% 68%,var(--chili) 68% 71%,transparent 71%);opacity:.55}
+@media(max-width:900px){.bowl{position:relative;right:auto;bottom:auto;width:18rem;max-width:80vw;height:auto;aspect-ratio:1;margin:3rem auto -12rem}}
+
+/* Über uns */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.about h2{font-size:clamp(2rem,4.5vw,3rem)}
+.about p{margin:0 0 1rem;max-width:34rem}
+.facts{margin:0;padding:0;list-style:none;border-left:4px solid var(--gold);padding-left:1.5rem}
+.facts li{padding:.6rem 0;border-bottom:1px solid var(--line)}
+.facts li:last-child{border:0}
+.facts strong{display:block;font-family:"Young Serif",serif;font-weight:400;font-size:1.2rem}
+.facts span{color:var(--muted)}
+@media(max-width:760px){.about{grid-template-columns:1fr}}
+
+/* Speisekarte */
+.menu{background:var(--surface)}
+.menu h2{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:.5rem}
+.menu .sub{color:var(--muted);margin:0 0 2.5rem;max-width:38rem}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:0 4rem}
+.cols h3{font-size:1.5rem;margin:2rem 0 .5rem;color:var(--jade)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .cols h3{color:var(--gold)}}
+.dish{padding:.9rem 0;border-bottom:1px solid var(--line)}
+.dish .top{display:flex;justify-content:space-between;gap:1rem;font-weight:600}
+.dish .name em{font-style:normal;font-family:"Noto Sans Myanmar",sans-serif;font-weight:500;color:var(--muted);font-size:.85em;margin-left:.4rem}
+.dish p{margin:.2rem 0 0;color:var(--muted);font-size:.98rem}
+.tag{display:inline-block;font-size:.78rem;font-weight:600;padding:.05rem .5rem;border-radius:4px;margin-left:.4rem;vertical-align:middle}
+.tag.v{background:var(--jade);color:var(--jade-ink)}
+.tag.h{background:var(--chili);color:#fff}
+.legend{margin-top:2rem;color:var(--muted);font-size:.95rem}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+
+/* Besuch */
+.visit{max-width:44rem}
+.visit h2{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:1.5rem}
+.hours{width:100%;border-collapse:collapse}
+.hours td{padding:.55rem 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+address{font-style:normal;margin-bottom:1.5rem}
+.visit .box{background:var(--jade);color:var(--jade-ink);padding:2rem;border-radius:1.25rem;margin-top:2rem}
+.visit .box h3{font-size:1.6rem;margin-bottom:.75rem}
+.visit .box p{margin:0 0 1.25rem}
+@media(max-width:760px){.visit{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding:2rem 0;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav aria-label="Hauptnavigation">
+      <a class="logo" href="#">Mandalay</a>
+      <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      <ul id="menu">
+        <li><a href="#uns">Über uns</a></li>
+        <li><a href="#karte">Speisekarte</a></li>
+        <li><a href="#besuch">Besuch</a></li>
+      </ul>
+    </nav>
+    <p class="mingalaba" lang="my">မင်္ဂလာပါ</p>
+    <h1>Burmesisch kochen wie bei Mama.</h1>
+    <p class="lead">Frische Currys, Nudelsuppen und Teeblattsalat nach den Rezepten unserer Familie aus Myanmar – jeden Tag frisch zubereitet.</p>
+    <div class="btns">
+      <a class="btn primary" href="tel:+4900000000000">Tisch reservieren</a>
+      <a class="btn ghost" href="#karte">Speisekarte ansehen</a>
+    </div>
+  </div>
+  <div class="bowl" aria-hidden="true"></div>
+</header>
+
+<main>
+<section id="uns">
+  <div class="wrap about">
+    <div>
+      <h2>Ein Familienbetrieb, drei Generationen Rezepte</h2>
+      <p>Mandalay war die letzte Königsstadt Burmas und gilt bis heute als kulturelles Herz des Landes. Unsere Küche verbindet, was Burma ausmacht: die Kräuter und Säure aus dem Süden, die Nudeln der Shan-Berge und die Currys vom Land.</p>
+      <p>Mutter Khin kocht, Vater Tun kümmert sich um den Tee und die Gäste, und die Kinder bedienen. Gewürzpasten, Brühen und Röstzwiebeln machen wir selbst – ohne Fertigprodukte.</p>
+    </div>
+    <ul class="facts">
+      <li><strong>Frisch gemacht</strong><span>Brühen kochen bis zu acht Stunden.</span></li>
+      <li><strong>Viel Pflanzliches</strong><span>Viele Gerichte vegetarisch oder vegan.</span></li>
+      <li><strong>Mild bis scharf</strong><span>Sagen Sie uns Ihre Schärfe, wir stellen sie ein.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="karte" class="menu">
+  <div class="wrap">
+    <h2>Speisekarte</h2>
+    <p class="sub">Eine Auswahl unserer Klassiker. Am besten bestellen Sie mehrere Gerichte und teilen, so wie wir es zu Hause tun.</p>
+    <div class="cols">
+      <div>
+        <h3>Zum Anfangen</h3>
+        <div class="dish"><div class="top"><span class="name">Lahpet Thoke<em>လက်ဖက်သုပ်</em><span class="tag v">vegan</span></span><span>9,50 €</span></div><p>Fermentierter Teeblattsalat mit knusprigen Bohnen, Erdnüssen, Sesam, Tomate und Limette.</p></div>
+        <div class="dish"><div class="top"><span class="name">Samosa Thoke<span class="tag v">vegan</span></span><span>8,90 €</span></div><p>Hausgemachte Samosas auf Kohl und Gurke, mit Kichererbsenbrühe und Chili.</p></div>
+        <div class="dish"><div class="top"><span class="name">Bohnen-Fritters<span class="tag v">vegan</span></span><span>6,90 €</span></div><p>Knusprig frittiert, dazu Tamarinden-Dip.</p></div>
+
+        <h3>Suppen &amp; Nudeln</h3>
+        <div class="dish"><div class="top"><span class="name">Mohinga<em>မုန့်ဟင်းခါး</em></span><span>11,90 €</span></div><p>Das burmesische Frühstück: Reisnudeln in Fischbrühe mit Zitronengras, Bananenstamm und Ei.</p></div>
+        <div class="dish"><div class="top"><span class="name">Ohn No Khao Swe</span><span>13,50 €</span></div><p>Weizennudeln in Kokosnuss-Hühnercurry mit Ei, Zwiebel und Koriander.</p></div>
+        <div class="dish"><div class="top"><span class="name">Shan Nudeln<span class="tag h">scharf</span></span><span>12,50 €</span></div><p>Reisnudeln mit Hähnchen oder Tofu, Tomatensauce und eingelegtem Senfgemüse.</p></div>
+      </div>
+      <div>
+        <h3>Currys &amp; Hauptgerichte</h3>
+        <div class="dish"><div class="top"><span class="name">Kyet Thar Hin</span><span>14,90 €</span></div><p>Hähnchencurry nach Hausart, langsam geschmort, mit Reis und Linsensuppe.</p></div>
+        <div class="dish"><div class="top"><span class="name">Wetha Hin</span><span>15,90 €</span></div><p>Schweinefleisch mit Tamarinde und Knoblauch, mild-säuerlich.</p></div>
+        <div class="dish"><div class="top"><span class="name">Gemüsecurry<span class="tag v">vegan</span></span><span>12,90 €</span></div><p>Kürbis, Aubergine und Kartoffel in Zwiebel-Tomaten-Sauce.</p></div>
+        <div class="dish"><div class="top"><span class="name">Tofu Kyaw<span class="tag v">vegan</span></span><span>11,50 €</span></div><p>Shan-Tofu aus Kichererbsen, knusprig gebraten, mit Chili-Dip.</p></div>
+
+        <h3>Getränke &amp; Süßes</h3>
+        <div class="dish"><div class="top"><span class="name">Laphet Yay<em>လက်ဖက်ရည်</em></span><span>3,90 €</span></div><p>Burmesischer Milchtee, süß und kräftig.</p></div>
+        <div class="dish"><div class="top"><span class="name">Falooda</span><span>5,90 €</span></div><p>Rosenmilch mit Basilikumsamen, Nudeln und Eis.</p></div>
+        <div class="dish"><div class="top"><span class="name">Shwe Gyi Mont<span class="tag v">vegan</span></span><span>5,50 €</span></div><p>Warmer Grießkuchen mit Kokos und Rosinen.</p></div>
+      </div>
+    </div>
+    <p class="legend">Bitte sagen Sie uns bei Allergien Bescheid, viele Gerichte enthalten Erdnüsse, Sesam, Fisch und Soja. Preise inkl. MwSt.</p>
+  </div>
+</section>
+
+<section id="besuch">
+  <div class="wrap visit">
+    <div>
+      <h2>Kommen Sie vorbei</h2>
+      <address>
+        Mandalay – Burmesische Küche<br>
+        Musterstraße 12<br>
+        50667 Köln
+      </address>
+      <table class="hours">
+        <tr><td>Montag</td><td>Ruhetag</td></tr>
+        <tr><td>Dienstag – Freitag</td><td>12:00 – 14:30, 17:30 – 22:00</td></tr>
+        <tr><td>Samstag</td><td>12:00 – 22:00</td></tr>
+        <tr><td>Sonntag</td><td>12:00 – 21:00</td></tr>
+      </table>
+      <div class="box">
+      <h3>Tisch reservieren</h3>
+      <p>Rufen Sie uns an oder schreiben Sie uns. Für Gruppen ab sechs Personen empfehlen wir, einige Tage vorher zu reservieren.</p>
+      <div class="btns">
+        <a class="btn primary" href="tel:+4900000000000">0000 000 000 00</a>
+        <a class="btn ghost" href="mailto:hallo@mandalay-koeln.example">E-Mail schreiben</a>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Mandalay Köln – Familie Aung</span>
+    <span>Impressum · Datenschutz</span>
+  </div>
+</footer>
+
+<script>
+(function(){var n=document.querySelector('nav'),b=n.querySelector('.burger');
+function set(o){n.classList.toggle('open',o);b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Menü schließen':'Menü öffnen')}
+b.addEventListener('click',function(){set(!n.classList.contains('open'))});
+n.querySelectorAll('ul a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
+})();
+</script>
+
+</body>
+</html>
