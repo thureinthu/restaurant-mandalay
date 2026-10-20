@@ -1,124 +1,383 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Mandalay – Burmesische Küche in Köln, familiengeführt</title>
-  <meta name="description" content="Familiengeführtes burmesisches Restaurant in Köln: Currys, Nudelsuppen und Teeblattsalat nach Familienrezepten aus Myanmar.">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, viewport-fit=cover"
+		/>
+		<title>Mandalay – Burmesische Küche in Köln, familiengeführt</title>
+		<meta
+			name="description"
+			content="Familiengeführtes burmesisches Restaurant in Köln: Currys, Nudelsuppen und Teeblattsalat nach Familienrezepten aus Myanmar."
+		/>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&family=Noto+Sans+Myanmar:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+		<link
+			rel="preload"
+			href="assets/fonts/young-serif-latin.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			href="assets/fonts/figtree-latin.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link rel="stylesheet" href="css/styles.css" />
+	</head>
+	<body>
+		<header class="hero">
+			<div class="wrap">
+				<nav aria-label="Hauptnavigation">
+					<a class="logo" href="#">Mandalay</a>
+					<button
+						class="burger"
+						type="button"
+						aria-label="Menü öffnen"
+						aria-expanded="false"
+						aria-controls="menu"
+					>
+						<span></span><span></span><span></span>
+					</button>
+					<ul id="menu">
+						<li><a href="#uns">Über uns</a></li>
+						<li><a href="#karte">Speisekarte</a></li>
+						<li><a href="#besuch">Besuch</a></li>
+					</ul>
+				</nav>
+				<p class="mingalaba" lang="my">မင်္ဂလာပါ</p>
+				<h1>Restaurant Mandalay</h1>
+				<p class="lead">
+					Das einzie burmesische Restaurant in Köln. Seit über 40
+					Jahren familiengeführt.
+				</p>
+				<div class="btns">
+					<a class="btn primary" href="tel:+492215101296"
+						>Tisch reservieren</a
+					>
+					<a class="btn ghost" href="#karte"
+						>Speisekarte ansehen</a
+					>
+				</div>
+			</div>
+			<div class="bowl" aria-hidden="true"></div>
+		</header>
 
-<header class="hero">
-  <div class="wrap">
-    <nav aria-label="Hauptnavigation">
-      <a class="logo" href="#">Mandalay</a>
-      <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
-      <ul id="menu">
-        <li><a href="#uns">Über uns</a></li>
-        <li><a href="#karte">Speisekarte</a></li>
-        <li><a href="#besuch">Besuch</a></li>
-      </ul>
-    </nav>
-    <p class="mingalaba" lang="my">မင်္ဂလာပါ</p>
-    <h1>Burmesisch kochen wie bei Mama.</h1>
-    <p class="lead">Frische Currys, Nudelsuppen und Teeblattsalat nach den Rezepten unserer Familie aus Myanmar – jeden Tag frisch zubereitet.</p>
-    <div class="btns">
-      <a class="btn primary" href="tel:+4900000000000">Tisch reservieren</a>
-      <a class="btn ghost" href="#karte">Speisekarte ansehen</a>
-    </div>
-  </div>
-  <div class="bowl" aria-hidden="true"></div>
-</header>
+		<main>
+			<section id="uns">
+				<div class="wrap about">
+					<div>
+						<h2>
+							Ein Familienbetrieb, drei Generationen
+							Rezepte
+						</h2>
+						<p>
+							Mandalay war die letzte Königsstadt Burmas
+							und gilt bis heute als kulturelles Herz des
+							Landes. Unsere Küche verbindet, was Burma
+							ausmacht: die Kräuter und Säure aus dem
+							Süden, die Nudeln der Shan-Berge und die
+							Currys vom Land.
+						</p>
+						<p>
+							Mutter Khin kocht, Vater Tun kümmert sich um
+							den Tee und die Gäste, und die Kinder
+							bedienen. Gewürzpasten, Brühen und
+							Röstzwiebeln machen wir selbst – ohne
+							Fertigprodukte.
+						</p>
+					</div>
+					<ul class="facts">
+						<li>
+							<strong>Frisch gemacht</strong
+							><span
+								>Brühen kochen bis zu acht
+								Stunden.</span
+							>
+						</li>
+						<li>
+							<strong>Viel Pflanzliches</strong
+							><span
+								>Viele Gerichte vegetarisch oder
+								vegan.</span
+							>
+						</li>
+						<li>
+							<strong>Mild bis scharf</strong
+							><span
+								>Sagen Sie uns Ihre Schärfe, wir stellen
+								sie ein.</span
+							>
+						</li>
+					</ul>
+				</div>
+			</section>
 
-<main>
-<section id="uns">
-  <div class="wrap about">
-    <div>
-      <h2>Ein Familienbetrieb, drei Generationen Rezepte</h2>
-      <p>Mandalay war die letzte Königsstadt Burmas und gilt bis heute als kulturelles Herz des Landes. Unsere Küche verbindet, was Burma ausmacht: die Kräuter und Säure aus dem Süden, die Nudeln der Shan-Berge und die Currys vom Land.</p>
-      <p>Mutter Khin kocht, Vater Tun kümmert sich um den Tee und die Gäste, und die Kinder bedienen. Gewürzpasten, Brühen und Röstzwiebeln machen wir selbst – ohne Fertigprodukte.</p>
-    </div>
-    <ul class="facts">
-      <li><strong>Frisch gemacht</strong><span>Brühen kochen bis zu acht Stunden.</span></li>
-      <li><strong>Viel Pflanzliches</strong><span>Viele Gerichte vegetarisch oder vegan.</span></li>
-      <li><strong>Mild bis scharf</strong><span>Sagen Sie uns Ihre Schärfe, wir stellen sie ein.</span></li>
-    </ul>
-  </div>
-</section>
+			<section id="karte" class="menu">
+				<div class="wrap">
+					<h2>Speisekarte</h2>
+					<p class="sub">
+						Eine Auswahl unserer Klassiker. Am besten
+						bestellen Sie mehrere Gerichte und teilen, so wie
+						wir es zu Hause tun.
+					</p>
+					<div class="cols">
+						<div>
+							<h3>Zum Anfangen</h3>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Lahpet Thoke<em
+											>လက်ဖက်သုပ်</em
+										><span class="tag v"
+											>vegan</span
+										></span
+									><span>9,50 €</span>
+								</div>
+								<p>
+									Fermentierter Teeblattsalat mit
+									knusprigen Bohnen, Erdnüssen,
+									Sesam, Tomate und Limette.
+								</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Samosa Thoke<span
+											class="tag v"
+											>vegan</span
+										></span
+									><span>8,90 €</span>
+								</div>
+								<p>
+									Hausgemachte Samosas auf Kohl und
+									Gurke, mit Kichererbsenbrühe und
+									Chili.
+								</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Bohnen-Fritters<span
+											class="tag v"
+											>vegan</span
+										></span
+									><span>6,90 €</span>
+								</div>
+								<p>
+									Knusprig frittiert, dazu
+									Tamarinden-Dip.
+								</p>
+							</div>
 
-<section id="karte" class="menu">
-  <div class="wrap">
-    <h2>Speisekarte</h2>
-    <p class="sub">Eine Auswahl unserer Klassiker. Am besten bestellen Sie mehrere Gerichte und teilen, so wie wir es zu Hause tun.</p>
-    <div class="cols">
-      <div>
-        <h3>Zum Anfangen</h3>
-        <div class="dish"><div class="top"><span class="name">Lahpet Thoke<em>လက်ဖက်သုပ်</em><span class="tag v">vegan</span></span><span>9,50 €</span></div><p>Fermentierter Teeblattsalat mit knusprigen Bohnen, Erdnüssen, Sesam, Tomate und Limette.</p></div>
-        <div class="dish"><div class="top"><span class="name">Samosa Thoke<span class="tag v">vegan</span></span><span>8,90 €</span></div><p>Hausgemachte Samosas auf Kohl und Gurke, mit Kichererbsenbrühe und Chili.</p></div>
-        <div class="dish"><div class="top"><span class="name">Bohnen-Fritters<span class="tag v">vegan</span></span><span>6,90 €</span></div><p>Knusprig frittiert, dazu Tamarinden-Dip.</p></div>
+							<h3>Suppen &amp; Nudeln</h3>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Mohinga<em
+											>မုန့်ဟင်းခါး</em
+										></span
+									><span>11,90 €</span>
+								</div>
+								<p>
+									Das burmesische Frühstück:
+									Reisnudeln in Fischbrühe mit
+									Zitronengras, Bananenstamm und Ei.
+								</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Ohn No Khao Swe</span
+									><span>13,50 €</span>
+								</div>
+								<p>
+									Weizennudeln in
+									Kokosnuss-Hühnercurry mit Ei,
+									Zwiebel und Koriander.
+								</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Shan Nudeln<span
+											class="tag h"
+											>scharf</span
+										></span
+									><span>12,50 €</span>
+								</div>
+								<p>
+									Reisnudeln mit Hähnchen oder Tofu,
+									Tomatensauce und eingelegtem
+									Senfgemüse.
+								</p>
+							</div>
+						</div>
+						<div>
+							<h3>Currys &amp; Hauptgerichte</h3>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Kyet Thar Hin</span
+									><span>14,90 €</span>
+								</div>
+								<p>
+									Hähnchencurry nach Hausart, langsam
+									geschmort, mit Reis und
+									Linsensuppe.
+								</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Wetha Hin</span
+									><span>15,90 €</span>
+								</div>
+								<p>
+									Schweinefleisch mit Tamarinde und
+									Knoblauch, mild-säuerlich.
+								</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Gemüsecurry<span
+											class="tag v"
+											>vegan</span
+										></span
+									><span>12,90 €</span>
+								</div>
+								<p>
+									Kürbis, Aubergine und Kartoffel in
+									Zwiebel-Tomaten-Sauce.
+								</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Tofu Kyaw<span class="tag v"
+											>vegan</span
+										></span
+									><span>11,50 €</span>
+								</div>
+								<p>
+									Shan-Tofu aus Kichererbsen,
+									knusprig gebraten, mit Chili-Dip.
+								</p>
+							</div>
 
-        <h3>Suppen &amp; Nudeln</h3>
-        <div class="dish"><div class="top"><span class="name">Mohinga<em>မုန့်ဟင်းခါး</em></span><span>11,90 €</span></div><p>Das burmesische Frühstück: Reisnudeln in Fischbrühe mit Zitronengras, Bananenstamm und Ei.</p></div>
-        <div class="dish"><div class="top"><span class="name">Ohn No Khao Swe</span><span>13,50 €</span></div><p>Weizennudeln in Kokosnuss-Hühnercurry mit Ei, Zwiebel und Koriander.</p></div>
-        <div class="dish"><div class="top"><span class="name">Shan Nudeln<span class="tag h">scharf</span></span><span>12,50 €</span></div><p>Reisnudeln mit Hähnchen oder Tofu, Tomatensauce und eingelegtem Senfgemüse.</p></div>
-      </div>
-      <div>
-        <h3>Currys &amp; Hauptgerichte</h3>
-        <div class="dish"><div class="top"><span class="name">Kyet Thar Hin</span><span>14,90 €</span></div><p>Hähnchencurry nach Hausart, langsam geschmort, mit Reis und Linsensuppe.</p></div>
-        <div class="dish"><div class="top"><span class="name">Wetha Hin</span><span>15,90 €</span></div><p>Schweinefleisch mit Tamarinde und Knoblauch, mild-säuerlich.</p></div>
-        <div class="dish"><div class="top"><span class="name">Gemüsecurry<span class="tag v">vegan</span></span><span>12,90 €</span></div><p>Kürbis, Aubergine und Kartoffel in Zwiebel-Tomaten-Sauce.</p></div>
-        <div class="dish"><div class="top"><span class="name">Tofu Kyaw<span class="tag v">vegan</span></span><span>11,50 €</span></div><p>Shan-Tofu aus Kichererbsen, knusprig gebraten, mit Chili-Dip.</p></div>
+							<h3>Getränke &amp; Süßes</h3>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Laphet Yay<em
+											>လက်ဖက်ရည်</em
+										></span
+									><span>3,90 €</span>
+								</div>
+								<p>
+									Burmesischer Milchtee, süß und
+									kräftig.
+								</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Falooda</span
+									><span>5,90 €</span>
+								</div>
+								<p>
+									Rosenmilch mit Basilikumsamen,
+									Nudeln und Eis.
+								</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"
+										>Shwe Gyi Mont<span
+											class="tag v"
+											>vegan</span
+										></span
+									><span>5,50 €</span>
+								</div>
+								<p>
+									Warmer Grießkuchen mit Kokos und
+									Rosinen.
+								</p>
+							</div>
+						</div>
+					</div>
+					<p class="legend">
+						Bitte sagen Sie uns bei Allergien Bescheid, viele
+						Gerichte enthalten Erdnüsse, Sesam, Fisch und
+						Soja. Preise inkl. MwSt.
+					</p>
+				</div>
+			</section>
 
-        <h3>Getränke &amp; Süßes</h3>
-        <div class="dish"><div class="top"><span class="name">Laphet Yay<em>လက်ဖက်ရည်</em></span><span>3,90 €</span></div><p>Burmesischer Milchtee, süß und kräftig.</p></div>
-        <div class="dish"><div class="top"><span class="name">Falooda</span><span>5,90 €</span></div><p>Rosenmilch mit Basilikumsamen, Nudeln und Eis.</p></div>
-        <div class="dish"><div class="top"><span class="name">Shwe Gyi Mont<span class="tag v">vegan</span></span><span>5,50 €</span></div><p>Warmer Grießkuchen mit Kokos und Rosinen.</p></div>
-      </div>
-    </div>
-    <p class="legend">Bitte sagen Sie uns bei Allergien Bescheid, viele Gerichte enthalten Erdnüsse, Sesam, Fisch und Soja. Preise inkl. MwSt.</p>
-  </div>
-</section>
+			<section id="besuch">
+				<div class="wrap visit">
+					<div>
+						<h2>Kommen Sie vorbei</h2>
+						<address>
+							Mandalay Restaurant<br />
+							Brüsseler Str. 53<br />
+							50674 Köln
+						</address>
+						<table class="hours">
+							<tr>
+								<td>Montag</td>
+								<td>Ruhetag</td>
+							</tr>
+							<tr>
+								<td>Dienstag – Freitag</td>
+								<td>12:00 – 14:30, 17:30 – 22:00</td>
+							</tr>
+							<tr>
+								<td>Samstag</td>
+								<td>12:00 – 22:00</td>
+							</tr>
+							<tr>
+								<td>Sonntag</td>
+								<td>12:00 – 21:00</td>
+							</tr>
+						</table>
+						<div class="box">
+							<h3>Tisch reservieren</h3>
+							<p>
+								Rufen Sie uns an oder schreiben Sie uns.
+								Für Gruppen ab sechs Personen empfehlen
+								wir, einige Tage vorher zu reservieren.
+							</p>
+							<div class="btns">
+								<a
+									class="btn primary"
+									href="tel:+492215101296"
+									>0221 510 12 96</a
+								>
+								<a
+									class="btn ghost"
+									href="mailto:aungthu@t-online.de"
+									>E-Mail schreiben</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
 
-<section id="besuch">
-  <div class="wrap visit">
-    <div>
-      <h2>Kommen Sie vorbei</h2>
-      <address>
-        Mandalay – Burmesische Küche<br>
-        Musterstraße 12<br>
-        50667 Köln
-      </address>
-      <table class="hours">
-        <tr><td>Montag</td><td>Ruhetag</td></tr>
-        <tr><td>Dienstag – Freitag</td><td>12:00 – 14:30, 17:30 – 22:00</td></tr>
-        <tr><td>Samstag</td><td>12:00 – 22:00</td></tr>
-        <tr><td>Sonntag</td><td>12:00 – 21:00</td></tr>
-      </table>
-      <div class="box">
-        <h3>Tisch reservieren</h3>
-        <p>Rufen Sie uns an oder schreiben Sie uns. Für Gruppen ab sechs Personen empfehlen wir, einige Tage vorher zu reservieren.</p>
-        <div class="btns">
-          <a class="btn primary" href="tel:+4900000000000">0000 000 000 00</a>
-          <a class="btn ghost" href="mailto:hallo@mandalay-koeln.example">E-Mail schreiben</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-</main>
+		<footer>
+			<div class="wrap">
+				<span>© 2026 Mandalay Köln – Familie Aung</span>
+				<span class="legal-links"
+					><a href="impressum.html">Impressum</a> ·
+					<a href="datenschutz.html">Datenschutz</a></span
+				>
+			</div>
+		</footer>
 
-<footer>
-  <div class="wrap">
-    <span>© 2026 Mandalay Köln – Familie Aung</span>
-    <span>Impressum · Datenschutz</span>
-  </div>
-</footer>
-
-<script src="js/main.js"></script>
-</body>
+		<script src="js/main.js"></script>
+	</body>
 </html>

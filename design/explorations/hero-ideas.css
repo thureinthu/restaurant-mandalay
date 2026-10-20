@@ -1,0 +1,231 @@
+/* ==========================================================================
+   Hero explorations – prototypes only, not used by the live site.
+   Loaded after css/styles.css and builds on its tokens and .hero styles.
+   ========================================================================== */
+
+/* Switcher bar between the ideas ------------------------------------------- */
+.proto-bar { background: var(--ink); color: var(--bg); font-size: .9rem; }
+.proto-bar .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1rem; padding-top: .6rem; padding-bottom: .6rem; }
+.proto-bar strong { font-weight: 600; }
+.proto-bar a { text-decoration: none; opacity: .75; }
+.proto-bar a:hover { opacity: 1; }
+.proto-bar a[aria-current="page"] { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+
+.proto-note { color: var(--muted); max-width: 38rem; }
+
+/* Photo placeholder --------------------------------------------------------
+   Striped box with a label. The <img>/<video> inside covers it once the real
+   file exists; if the file is missing, the img removes itself (onerror). */
+.ph {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--jade-ink);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, .07) 0 12px, transparent 12px 24px),
+    color-mix(in srgb, var(--jade-ink) 14%, var(--jade));
+}
+.ph-label { position: relative; max-width: 17rem; padding: 1rem; font-size: .95rem; line-height: 1.4; }
+.ph-label strong { display: block; font-weight: 600; }
+.ph img, .ph video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* Idea 1 – the bowl becomes a real photo ------------------------------------ */
+.hero-grid { display: grid; gap: 4rem; align-items: center; }
+.hero-grid h1 { font-size: clamp(2.8rem, 7vw, 4.6rem); }
+
+.bowl-photo {
+  width: min(24rem, 62vw);
+  aspect-ratio: 1;
+  margin: 0 auto 2.75rem;
+  border-radius: 50%;
+  /* the rings of the old decorative bowl, now framing the photo */
+  box-shadow:
+    0 0 0 .6rem var(--jade),
+    0 0 0 1rem var(--gold),
+    0 0 0 2.1rem var(--jade),
+    0 0 0 2.5rem var(--chili);
+}
+.bowl-photo .ph { height: 100%; border-radius: 50%; }
+.bowl-photo .ph::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  animation: bowl-spin 60s linear infinite;
+}
+.bowl-photo img { animation: bowl-spin 90s linear infinite; }
+@keyframes bowl-spin { to { transform: rotate(360deg); } }
+
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: 1.1fr .9fr; gap: 3rem; }
+  .bowl-photo { margin: 0 0 0 auto; }
+}
+
+/* Idea 2 – split screen, photo fills the right half ------------------------ */
+.hero.split { padding-bottom: 0; }
+.hero.split .split-text { padding-bottom: 3rem; }
+.split-photo { aspect-ratio: 4 / 3; }
+
+@media (min-width: 900px) {
+  .hero.split { min-height: min(88svh, 46rem); padding-bottom: 5rem; }
+  .hero.split .split-text { max-width: min(30rem, calc(54vw - 4rem)); padding-bottom: 0; }
+  .hero.split h1 { font-size: clamp(2.8rem, 5.5vw, 4.6rem); }
+  .split-photo { position: absolute; top: 0; right: 0; bottom: 0; width: 46%; aspect-ratio: auto; }
+  /* darkens the top of the photo so the menu links stay readable */
+  .split-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 8rem;
+    background: linear-gradient(rgba(0, 0, 0, .45), transparent);
+  }
+}
+
+/* Idea 3 – short looping video behind the text ----------------------------- */
+.hero.video { min-height: min(92svh, 50rem); }
+.hero-media { position: absolute; inset: 0; z-index: 0; }
+.hero-media .ph { height: 100%; }
+.hero-media::after {
+  /* tints the video in the brand red so the text keeps enough contrast */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--jade) 78%, transparent);
+}
+@media (min-width: 900px) {
+  .hero-media::after {
+    background: linear-gradient(90deg,
+      color-mix(in srgb, var(--jade) 92%, transparent) 0 35%,
+      color-mix(in srgb, var(--jade) 45%, transparent));
+  }
+}
+
+/* stand-in motion while there is no real video yet */
+.no-video .hero-media video { display: none; }
+.no-video .hero-media .ph {
+  background:
+    radial-gradient(circle at 30% 60%, var(--gold), transparent 45%),
+    radial-gradient(circle at 75% 35%, var(--chili), transparent 50%),
+    var(--jade);
+  background-size: 160% 160%;
+  animation: steam 12s ease-in-out infinite alternate;
+}
+@keyframes steam { to { background-position: 100% 0, 0 100%, 0 0; } }
+.hero.paused .hero-media .ph { animation-play-state: paused; }
+
+.video-note {
+  display: none;
+  position: absolute;
+  left: 1.5rem;
+  right: 5.5rem;
+  bottom: 1.5rem;
+  z-index: 1;
+  margin: 0;
+  font-size: .9rem;
+  color: var(--jade-ink);
+  opacity: .85;
+}
+.no-video .video-note { display: block; }
+
+.video-toggle {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.25rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 2px solid var(--jade-ink);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .25);
+  color: var(--jade-ink);
+  cursor: pointer;
+}
+.video-toggle:hover { background: rgba(0, 0, 0, .4); }
+.video-toggle .icon-play { display: none; }
+.hero.paused .video-toggle .icon-play { display: block; }
+.hero.paused .video-toggle .icon-pause { display: none; }
+
+/* Idea 4 – illustrated Mohinga bowl (SVG) ---------------------------------- */
+/* Illustration colours: the brand tokens plus a few food colours of its own */
+:root {
+  --ill-lacquer: #3B1712;
+  --ill-broth: #E58A2E;
+  --ill-broth-light: #F0A54A;
+  --ill-noodle: #FBF0D6;
+  --ill-egg: #FFF8EA;
+  --ill-yolk: #F4B41A;
+  --ill-fritter: #C9782B;
+  --ill-fritter-dark: #9A5419;
+  --ill-stem: #EFE5C2;
+  --ill-stem-line: #D2C08E;
+  --ill-herb: #4E9A3F;
+  --ill-lime: #8DB52F;
+  --ill-lime-flesh: #D6E89A;
+  --ill-chili: #C6281C;
+  --ill-wood: #D9A35B;
+}
+
+.dish-art { width: min(30rem, 86vw); margin: 0 auto; }
+.dish-art svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.ill-shadow { fill: rgba(0, 0, 0, .18); }
+.ill-lacquer { fill: var(--ill-lacquer); }
+.ill-rim-dots { fill: none; stroke: var(--gold); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 0 14; }
+.ill-rim-line { fill: none; stroke: var(--gold); stroke-width: 3; }
+.ill-broth { fill: var(--ill-broth); }
+.ill-broth-swirl { fill: none; stroke: var(--ill-broth-light); stroke-width: 10; stroke-dasharray: 60 30; }
+.ill-noodles path { fill: none; stroke: var(--ill-noodle); stroke-width: 4; stroke-linecap: round; }
+.ill-fritter { fill: var(--ill-fritter); }
+.ill-fritter-dots { fill: var(--ill-fritter-dark); }
+.ill-stem { fill: var(--ill-stem); stroke: var(--ill-stem-line); stroke-width: 2; }
+.ill-stem-core { fill: var(--ill-stem-line); }
+.ill-herb { fill: var(--ill-herb); }
+.ill-egg { fill: var(--ill-egg); }
+.ill-yolk { fill: var(--ill-yolk); }
+.ill-face { fill: var(--ill-lacquer); }
+.ill-face-line { fill: none; stroke: var(--ill-lacquer); stroke-width: 1.8; stroke-linecap: round; }
+.ill-chili { fill: var(--ill-chili); }
+.ill-lime { fill: var(--ill-lime); }
+.ill-lime-flesh { fill: var(--ill-lime-flesh); }
+.ill-lime-lines { fill: none; stroke: var(--ill-lime); stroke-width: 2; }
+.ill-chopsticks line { stroke: var(--ill-wood); stroke-width: 9; stroke-linecap: round; }
+
+.ill-steam path {
+  fill: none;
+  stroke: var(--ill-egg);
+  stroke-width: 6;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: steam-rise 4s ease-out infinite;
+}
+.ill-steam .s2 { animation-delay: 1.3s; }
+.ill-steam .s3 { animation-delay: 2.6s; }
+@keyframes steam-rise {
+  0%   { opacity: 0;  transform: translateY(12px); }
+  30%  { opacity: .8; }
+  100% { opacity: 0;  transform: translateY(-34px); }
+}
+
+.eye { transform-box: fill-box; transform-origin: center; animation: blink 5s infinite; }
+@keyframes blink {
+  0%, 94%, 100% { transform: scaleY(1); }
+  97%           { transform: scaleY(.1); }
+}
+
+@media (min-width: 900px) {
+  .dish-art { margin: 0 0 0 auto; }
+}
+
+/* Reduced motion ----------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .bowl-photo .ph::before,
+  .bowl-photo img,
+  .no-video .hero-media .ph,
+  .eye { animation: none; }
+  .ill-steam path { animation: none; opacity: .5; }
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hero-Idee 3: Video – Mandalay</title>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="hero-ideas.css">
+</head>
+<body>
+
+<div class="proto-bar">
+  <div class="wrap">
+    <strong>Hero-Ideen:</strong>
+    <a href="hero-1-schuessel.html">1 · Schüssel</a>
+    <a href="hero-2-split.html">2 · Split</a>
+    <a href="hero-3-video.html" aria-current="page">3 · Video</a>
+    <a href="hero-4-illustration.html">4 · Illustration</a>
+  </div>
+</div>
+
+<header class="hero video">
+  <div class="hero-media" aria-hidden="true">
+    <div class="ph">
+      <video muted loop playsinline preload="metadata" poster="../../assets/images/hero-video-poster.jpg">
+        <source src="../../assets/videos/hero.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <div class="wrap">
+    <nav aria-label="Hauptnavigation">
+      <a class="logo" href="../../index.html">Mandalay</a>
+      <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      <ul id="menu">
+        <li><a href="../../index.html#uns">Über uns</a></li>
+        <li><a href="../../index.html#karte">Speisekarte</a></li>
+        <li><a href="../../index.html#besuch">Besuch</a></li>
+      </ul>
+    </nav>
+    <p class="mingalaba" lang="my">မင်္ဂလာပါ</p>
+    <h1>Restaurant Mandalay</h1>
+    <p class="lead">Das einzige burmesische Restaurant in Köln. Seit über 40 Jahren familiengeführt.</p>
+    <div class="btns">
+      <a class="btn primary" href="tel:+492215101296">Tisch reservieren</a>
+      <a class="btn ghost" href="../../index.html#karte">Speisekarte ansehen</a>
+    </div>
+  </div>
+  <p class="video-note">Platzhalter – hier läuft später ein 6–10 s Video, z. B. Tee wird gezogen (→ assets/videos/hero.mp4).</p>
+  <button class="video-toggle" type="button" aria-label="Video anhalten">
+    <svg class="icon-pause" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" fill="currentColor"/></svg>
+    <svg class="icon-play" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>
+  </button>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <h2>Idee 3: Kurzes Video im Hintergrund</h2>
+      <p class="proto-note">Ein stummes 6–10-Sekunden-Video läuft in Schleife hinter dem Text, rot eingefärbt, damit die Schrift lesbar bleibt. Unten rechts kann man es anhalten. Bei „weniger Bewegung“ oder im Datensparmodus startet es nicht von selbst.</p>
+    </div>
+  </section>
+</main>
+
+<script src="../../js/main.js"></script>
+<script>
+  // Hero video: autoplay only when the visitor hasn't asked for less motion or data saving
+  (function () {
+    var hero = document.querySelector('.hero.video');
+    var video = hero.querySelector('video');
+    var source = video.querySelector('source');
+    var toggle = hero.querySelector('.video-toggle');
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      (navigator.connection && navigator.connection.saveData);
+    var playing = false;
+
+    function setPlaying(play) {
+      playing = play;
+      hero.classList.toggle('paused', !play);
+      toggle.setAttribute('aria-label', play ? 'Video anhalten' : 'Video abspielen');
+      if (play) {
+        var p = video.play();
+        if (p) p.catch(function () {});
+      } else {
+        video.pause();
+      }
+    }
+
+    // No video file yet → show the animated placeholder instead
+    source.addEventListener('error', function () { hero.classList.add('no-video'); });
+
+    toggle.addEventListener('click', function () { setPlaying(!playing); });
+
+    setPlaying(!calm);
+  })();
+</script>
+</body>
+</html>

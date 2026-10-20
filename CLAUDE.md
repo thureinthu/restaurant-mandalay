@@ -8,11 +8,13 @@ One-page website for **Mandalay**, a family-run Burmese restaurant in Köln, own
 
 ## Structure
 - `index.html` – the page (sections: hero, `#uns`, `#karte`, `#besuch`, footer)
+- `impressum.html`, `datenschutz.html` – legal pages; share the nav and footer with `index.html` (copied, so change all three together)
 - `css/styles.css` – all styles; design tokens (colors) at the top in `:root`
 - `js/main.js` – mobile burger menu
 - `assets/images|fonts|icons/` – site assets
 - `design/drafts/` – original design exports, kept as reference; never edited
 - `design/references/` – moodboards, screenshots, inspiration
+- `design/explorations/` – clickable prototypes (e.g. `hero-1/2/3-*.html` hero ideas); use the real `css/styles.css` plus `hero-ideas.css`, never linked from the live site
 
 ## Conventions
 - Site language is **German** (`lang="de"`); Burmese text gets `lang="my"`. Talk with Thurein in English.
@@ -22,8 +24,8 @@ One-page website for **Mandalay**, a family-run Burmese restaurant in Köln, own
 - Mobile first in testing: check ~375px, ~768px and desktop.
 
 ## Open items
-- Placeholder content still in the draft: address (Musterstraße 12), phone (`+4900000000000`), email (`.example`), menu & prices, opening hours, family names — confirm with the family.
-- **Impressum** and **Datenschutz** pages are legally required in Germany; footer currently has no links.
-- Google Fonts are loaded from Google's servers → GDPR risk in Germany. Plan: self-host the fonts in `assets/fonts/`.
+- Contact details are real on all pages (owner Ma Khin Mar Win, Brüsseler Str. 53, 50674 Köln, 0221 510 12 96, aungthu@t-online.de) and must stay identical across `index.html`, `impressum.html` and `datenschutz.html`.
+- Placeholder content still in `index.html`: menu & prices, opening hours, family names in "Über uns" and the footer ("Familie Aung") — confirm with the family.
+- **Impressum** and **Datenschutz** pages exist but contain placeholders, highlighted with `<span class="todo">` (owner name, USt-IdNr., hosting provider). Each file has a TODO comment at the top. Have the final texts checked before launch.
 - No real photos yet.
 - Hosting/domain not decided.
