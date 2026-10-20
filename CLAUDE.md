@@ -7,6 +7,12 @@ One-page website for **Mandalay**, a family-run Burmese restaurant in Köln, own
   1. Explain in plain words, then run `git pull`, which downloads the latest version from GitHub. If there are local changes or the pull fails, stop and explain the situation simply instead of forcing anything.
   2. Read "Current status" below and give a short recap: what we did last, what's open.
   3. Suggest the next step and ask what Thurein wants to work on.
+- **"Review changes in Figma"** – take design changes from Figma into the code:
+  1. Read the desktop frame `2:2` and the phone frame `4:2` (see "Figma" below) with `get_screenshot` + `get_design_context`. This is read-only. If Thurein mentions a new frame or page, ask for its link.
+  2. Compare them with the current `index.html` + `css/styles.css`. The frames were imported from the code, so every difference is a change by Thurein. Ignore known import glitches: invisible Burmese text, the hero circle overlapping the buttons on the phone frame, generic layer names.
+  3. List the changes in plain words, numbered, with desktop/phone noted. Say how you'd build each one, mapping new colors to existing tokens or asking whether a color replaces a token or is new. Wait for Thurein's OK (all, or specific numbers).
+  4. Implement, explain what changed, and ask Thurein to check in Live Server (375 px, 768 px, desktop).
+  - Figma is the master design. After code changes that didn't come from Figma, offer to refresh the Figma frames (re-import), so the next review doesn't report them as differences.
 - **"Feierabend"** – end of a session:
   1. Update "Current status" below (date, what was done, what's next).
   2. Explain what will be saved, then commit everything and `git push`.
