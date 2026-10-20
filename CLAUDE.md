@@ -24,6 +24,13 @@ One-page website for **Mandalay**, a family-run Burmese restaurant in Köln, own
 - Open `index.html` directly, or use the VS Code "Live Server" extension for auto-reload.
 - Code lives at https://github.com/thureinthu/restaurant-mandalay (branch `main`). Use only the GitHub account **thureinthu** (not ThureinDOM).
 
+## Figma
+- Design file: https://www.figma.com/design/2NfehXjKjFBXh7f0gUTYLP/Restaurant-Mandalay (fileKey `2NfehXjKjFBXh7f0gUTYLP`). The desktop page import of `index.html` is frame `2:2`.
+- Figma connection is set up in `.mcp.json` (Figma's official server). On a new computer, Thurein logs in once: `/mcp` → figma → Authenticate.
+- **Code → Figma:** bundle `index.html` + `css/styles.css` into one HTML file in a temp folder, then use `html_to_figma`. It lands on a new page as plain editable layers (no components or variables).
+- **Figma → code:** Thurein sends a link to a frame, Claude reads it (`get_design_context` + `get_screenshot`) and updates the code using the existing tokens in `styles.css`.
+- Known issue: Burmese text (Noto Sans Myanmar) didn't render in the import. The font has to be available in Figma.
+
 ## Structure
 - `index.html` – the page (sections: hero, `#uns`, `#karte`, `#besuch`, footer)
 - `impressum.html`, `datenschutz.html` – legal pages; share the nav and footer with `index.html` (copied, so change all three together)
