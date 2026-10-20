@@ -2,6 +2,16 @@
 
 One-page website for **Mandalay**, a family-run Burmese restaurant in Köln, owned by Thurein's parents. Thurein (UX designer) leads design; Claude builds.
 
+## Quick start (code words)
+- **"Weiter"** – start of a session:
+  1. Explain in plain words, then run `git pull`, which downloads the latest version from GitHub. If there are local changes or the pull fails, stop and explain the situation simply instead of forcing anything.
+  2. Read "Current status" below and give a short recap: what we did last, what's open.
+  3. Suggest the next step and ask what Thurein wants to work on.
+- **"Feierabend"** – end of a session:
+  1. Update "Current status" below (date, what was done, what's next).
+  2. Explain what will be saved, then commit everything and `git push`.
+  3. Confirm in one line that everything is on GitHub.
+
 ## Working with Thurein
 - Talk in **English**, in easy, plain language. Thurein is a designer, not a developer.
 - **Explain before doing:** say in plain words what you're about to do and why, before doing it. Explain technical terms the first time they come up.
