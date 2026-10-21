@@ -43,53 +43,55 @@
     }
   });
 
-  // Slim bar: once the nav has scrolled out of view, it becomes a fixed bar
-  // that shows when scrolling up and hides when scrolling down. A spacer keeps
-  // the page from jumping while the nav is out of the flow.
+  // Sticky bar (phones and tablets): as soon as the page scrolls, the nav stays
+  // at the top and shrinks step by step into a slim bar (and grows back on the
+  // way up), following the scroll. A spacer keeps the page from jumping while
+  // the nav is out of the flow.
   var spacer = document.createElement('div');
   spacer.setAttribute('aria-hidden', 'true');
-  var top = 0;
   var bottom = 0;
   var lastY = window.scrollY;
   var ticking = false;
 
   function measure() {
-    var rect = nav.getBoundingClientRect();
-    top = rect.top + window.scrollY;
-    bottom = rect.bottom + window.scrollY;
+    bottom = nav.getBoundingClientRect().bottom + window.scrollY;
   }
 
-  function fix() {
+  function fix(p) {
     spacer.style.height = nav.offsetHeight + 'px';
     nav.parentNode.insertBefore(spacer, nav);
-    // Start hidden without animating, so the bar doesn't flash while sliding away
+    // Appear in place, without the slide-in animation
     nav.style.transition = 'none';
-    nav.classList.add('is-fixed');
+    nav.classList.add('is-fixed', 'is-shown');
+    // Jump links land below the slim bar (used by scroll-padding-top in the CSS)
+    nav.style.setProperty('--p', '0');
+    document.documentElement.style.setProperty('--bar-h', nav.offsetHeight + 'px');
+    nav.style.setProperty('--p', p.toFixed(3));
     void nav.offsetHeight;
     nav.style.transition = '';
   }
 
   function unfix() {
     nav.classList.remove('is-fixed', 'is-shown');
+    nav.style.removeProperty('--p');
     if (spacer.parentNode) spacer.parentNode.removeChild(spacer);
   }
 
   function update() {
     ticking = false;
     var y = window.scrollY;
+    // How far the header has shrunk: 1 = big header (at the top),
+    // 0 = slim bar (after scrolling the height of the header)
+    // (measured from the very top of the page, where bar and big header are identical)
+    var p = Math.min(1, Math.max(0, (bottom - y) / bottom));
     if (!mobile.matches) {
       unfix();
+    } else if (y <= 0) {
+      if (!isOpen()) unfix();   // at the top: the normal big header (looks identical)
     } else if (!nav.classList.contains('is-fixed')) {
-      if (y > bottom) fix();
+      fix(p);                   // starts scrolling: stays on top and begins to shrink
     } else {
-      var shown = nav.classList.contains('is-shown');
-      if (y <= (shown ? top : bottom)) {
-        unfix();
-      } else if (y < lastY - 6) {
-        nav.classList.add('is-shown');
-      } else if (y > lastY + 6 && !isOpen()) {
-        nav.classList.remove('is-shown');
-      }
+      nav.style.setProperty('--p', p.toFixed(3));
     }
     lastY = y;
   }

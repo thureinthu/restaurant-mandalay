@@ -42,8 +42,10 @@ One-page website for **Mandalay**, a family-run Burmese restaurant in Köln, own
 - `index.html` – the page (sections: hero, `#uns`, `#karte`, `#besuch`, footer)
 - `impressum.html`, `datenschutz.html` – legal pages; share the nav and footer with `index.html` (copied, so change all three together)
 - `css/styles.css` – all styles; design tokens (colors) at the top in `:root`
-- `js/main.js` – mobile navigation (full-screen menu with call + e-mail buttons, slim bar that slides in on scroll up); menu (Speisekarte) category tabs + "Hauptgerichte" filter (split pill: tab shows all, arrow opens the filter) (without JS the whole menu shows as one list)
+- `js/main.js` – mobile navigation (full-screen menu with call + e-mail buttons, sticky slim bar on phones/tablets ≤1024 px: slides in once the big header is out of view and **always stays visible**, at Thurein's request, while desktop has no sticky header; it sets `--bar-h` for `scroll-padding-top`); menu (Speisekarte) category tabs + "Hauptgerichte" filter (split pill: tab shows all, arrow opens the filter) (without JS the whole menu shows as one list)
 - `assets/images|fonts|icons/` – site assets
+- `assets/icons/Menu.svg` – burger icon, copied **inline** into the `.burger` button of all 3 pages (paths `.l1/.l2/.l3`, `fill="currentColor"`), so CSS can animate it into an ✕ (`nav.open`). If the icon changes, update all 3 pages.
+- `assets/images/Mandalay-Logo-02.png` – white round badge logo, shown in the header of all 3 pages: visible circle about 88 px (64 px on phones, ~48 px in the slim scroll bar). The PNG has ~8% transparent margin, so `--logo-size` on `nav` is larger and the margin is pulled in with negative margins. `Mandalay-Logo-01.png` is the same logo in gold (for light backgrounds).
 - `assets/images/drawings/` – hand-coded wax-crayon SVG drawings (Mohinga, Lahpet Thoke, Ohn No Khao Swe, samosas, milk tea, pot/leaf/chili icons). The crayon look comes from an SVG filter (`#wax`) + hatch pattern inside each file; preview with `qlmanage -t` (Quick Look) when no browser is available.
 - `assets/images/karte-mandalay.jpg` – Google Maps screenshot for the map in `#besuch` (static, clicks open Google Maps)
 - `design/drafts/` – original design exports, kept as reference; never edited
@@ -71,7 +73,19 @@ One-page website for **Mandalay**, a family-run Burmese restaurant in Köln, own
 ## Current status (update at the end of each session)
 _Last updated: 2026-10-21_
 - **Done on 2026-10-21:** "Über uns" re-laid out (headline + text side by side, three points in a row); real menu from the PDF (101 dishes, tabs Vorspeisen · Empfehlungen · Hauptgerichte ▾ · Menüs · Desserts, Hauptgerichte shows all with a type filter, German + English, allergens, columns filled top to bottom); "Besuch" full width with Google Maps picture (click opens Google Maps), hours + address next to the reservation box; wax-crayon Mohinga drawing in the hero (animated steam) replacing the decorative circle; new mobile navigation (full-screen red menu, slim bar on scroll up, call + "Online reservieren" buttons); OpenTable reservation link.
-- **Next:** Thurein checks everything in Live Server (375 px, 768 px, desktop, dark mode), especially the hero drawing vs. the headline, the mobile menu and the OpenTable link. Refresh the Figma frames afterwards (lots of code changes not from Figma).
-- **Hero headline:** still wraps onto two lines because of `max-width: 12ch` on `.hero h1`; fix was proposed (remove the limit, lower the max size), not yet decided.
+- **Done later on 2026-10-21 (on the desktop computer):**
+  - The real white logo (`Mandalay-Logo-02.png`) is now in the header of all 3 pages.
+  - Nav links on desktop use Young Serif.
+  - The burger is the inline `assets/icons/Menu.svg` (40 px). It animates into an ✕.
+  - The Mohinga bowl is hidden on phones (≤760 px).
+  - "Besuch" headline: "Wo Sie uns finden", centered.
+  - Typo "einzie" → "einzige" fixed.
+  - Phones/tablets: the header is now always sticky. It shrinks smoothly into the slim bar while scrolling down from the top, and grows back on the way up. Scroll-linked via `--p` (0 = slim, 1 = full); `--bar-h` is used for `scroll-padding-top`.
+- **Next:** Thurein tests the sticky header and burger on a real phone. Then refresh the Figma frames: lots of code changes didn't come from Figma, the frames are outdated, and the old ones get deleted per Thurein's rule.
+- **Decide:**
+  - The GitHub repo is **public**. Suggested making it private (Settings → Change visibility).
+  - The menu PDF `material/finale Speisekarte (1).pdf` is not on GitHub yet (only on the desktop computer). Upload it once the repo is private or Thurein agrees.
+  - `tools/make-map.js` (old OpenStreetMap map script) is only on the desktop computer and is no longer used, since the site uses a Google Maps screenshot.
+- **Hero headline:** still wraps onto two lines because of `max-width: 12ch` on `.hero h1`. A fix was proposed (remove the limit, lower the max size), but it isn't decided yet.
 - **On hold:** questions for the family for the Impressum. Is the business in the Handelsregister? If not, delete that block and change "Vertreten durch" to "Inhaberin". Do a USt-IdNr. and a Wirtschafts-ID exist?
-- **Small fixes:** typo "einzie" → "einzige" in the `index.html` hero (Thurein's own text, ask before fixing); footer "Familie Aung" is a placeholder.
+- **Small fixes:** footer "Familie Aung" is a placeholder.

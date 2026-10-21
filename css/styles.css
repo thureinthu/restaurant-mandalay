@@ -132,43 +132,60 @@ nav {
   flex-wrap: wrap;
   padding-bottom: 4rem;
 }
-.logo { font-family: "Young Serif", serif; font-size: 1.5rem; text-decoration: none; }
+/* Logo: white badge (assets/images/Mandalay-Logo-02.png) on the red header.
+   The PNG has ~8% transparent margin around the circle: the image is drawn
+   larger and that margin is pulled in, so the visible circle is ~88px
+   (~64px on phones) and lines up with the text below. */
+nav { --logo-full: 6.5rem; --logo-size: var(--logo-full); }
+.logo { display: block; flex: none; border-radius: 50%; }
+.logo img {
+  display: block;
+  width: var(--logo-size);
+  height: auto;
+  margin: calc(var(--logo-size) * -.08);
+}
+@media (max-width: 760px) {
+  nav { --logo-full: 4.75rem; }
+}
 nav ul { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
 nav a { text-decoration: none; font-weight: 500; }
+nav ul a { font-family: "Young Serif", Georgia, serif; font-weight: 400; font-size: 1.125rem; }   /* same font as the hero headline */
 nav a:hover { color: var(--gold); }
 
+/* Burger: assets/icons/Menu.svg inline (3 lines), animates into an ✕ */
 .burger {
   display: none;
+  place-items: center;
   background: none;
   color: var(--jade-ink);
-  border: 2px solid var(--jade-ink);
+  border: 0;
   border-radius: .6rem;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3rem;                  /* comfortable tap target */
+  height: 3rem;
   padding: 0;
   cursor: pointer;
 }
-.burger span {
-  display: block;
-  width: 1.3rem;
-  height: 2px;
-  background: currentColor;
-  margin: .3rem auto;
-  transition: transform .2s, opacity .2s;
+.burger-icon { display: block; width: 2.5rem; height: 2.5rem; }
+.burger-icon path {
+  transform-box: view-box;
+  transform-origin: 12px 12px;  /* centre of the 24×24 icon */
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1), opacity .2s ease;
 }
-nav.open .burger span:nth-child(1) { transform: translateY(calc(.6rem + 2px)) rotate(45deg); }
-nav.open .burger span:nth-child(2) { opacity: 0; }
-nav.open .burger span:nth-child(3) { transform: translateY(calc(-.6rem - 2px)) rotate(-45deg); }
+/* Open: top and bottom line move to the middle (5 units) and turn ±45° */
+nav.open .burger-icon .l1 { transform: rotate(45deg) translateY(5px); }
+nav.open .burger-icon .l2 { opacity: 0; }
+nav.open .burger-icon .l3 { transform: rotate(-45deg) translateY(-5px); }
 
 /* Call + e-mail buttons: only shown in the full-screen mobile menu */
 nav .menu-extra { display: none; }
 
 @media (max-width: 1024px) {
-  html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 4.5rem); }
+  /* Jump links land below the sticky bar (--bar-h is measured by js/main.js) */
+  html { scroll-padding-top: calc(var(--bar-h, calc(env(safe-area-inset-top, 0px) + 4.5rem)) + .5rem); }
   html.menu-open { overflow: hidden; }
 
   nav { flex-wrap: nowrap; }
-  .burger { display: block; }
+  .burger { display: grid; }
   /* Logo + burger stay on top of the open menu (the burger becomes the ✕) */
   .logo, .burger { position: relative; z-index: 41; }
 
@@ -215,14 +232,18 @@ nav .menu-extra { display: none; }
     left: 0;
     right: 0;
     z-index: 50;
-    padding: calc(env(safe-area-inset-top, 0px) + .6rem) 1.5rem .6rem;
+    /* --p (0 = slim bar, 1 = full header) is set by js/main.js while scrolling
+       back up to the top, so the bar grows smoothly into the big header */
+    padding: calc(env(safe-area-inset-top, 0px) + .6rem + .65rem * var(--p, 0)) 1.5rem .6rem;
     background: var(--jade);
     color: var(--jade-ink);
-    box-shadow: 0 6px 20px -10px rgb(0 0 0 / .45);
+    box-shadow: 0 6px 20px -10px rgb(0 0 0 / calc(.45 * (1 - var(--p, 0))));
     transform: translateY(-110%);
   }
   /* "none" (not translateY(0)) so the open menu inside is fixed to the screen, not the bar */
   .hero .wrap > nav.is-fixed.is-shown { transform: none; }
+  /* Slim bar logo (~48px circle), growing to the full size as --p goes to 1 */
+  .hero .wrap > nav.is-fixed { --logo-size: calc(3.5rem + (var(--logo-full) - 3.5rem) * var(--p, 0)); }
 }
 
 @media (max-width: 1024px) and (prefers-reduced-motion: no-preference) {
@@ -277,6 +298,10 @@ nav .menu-extra { display: none; }
     width: min(18rem, 70vw);
     margin: 2.5rem auto 0;
   }
+}
+/* Phones: no bowl, it only makes the page longer (tablet and desktop keep it) */
+@media (max-width: 760px) {
+  .hero-art { display: none; }
 }
 
 /* Über uns ----------------------------------------------------------------- */
@@ -488,7 +513,7 @@ nav .menu-extra { display: none; }
 }
 
 /* Besuch ------------------------------------------------------------------- */
-.visit h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 1.5rem; }
+.visit h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 1.5rem; text-align: center; }
 
 /* Map: static Google Maps screenshot (assets/images/karte-mandalay.jpg).
    Clicking the map or the button opens Google Maps. */
@@ -595,5 +620,5 @@ footer a[aria-current="page"] { color: var(--ink); font-weight: 600; }
 /* Reduced motion ----------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .burger span { transition: none; }
+  .burger-icon path { transition: none; }
 }
