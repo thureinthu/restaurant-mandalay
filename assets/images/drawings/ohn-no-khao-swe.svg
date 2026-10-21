@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <filter id="wax" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="6" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="5" xChannelSelector="R" yChannelSelector="G" result="wobbly"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="13" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 2.5" result="mask"/>
+      <feComposite in="wobbly" in2="mask" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#3B2416" stroke-opacity=".16" stroke-width="2.6"/>
+    </pattern>
+    <clipPath id="soup"><ellipse cx="200" cy="178" rx="146" ry="50"/></clipPath>
+  </defs>
+
+  <g filter="url(#wax)" stroke-linecap="round" stroke-linejoin="round">
+    <!-- steam -->
+    <g fill="none" stroke="#B9AFA2" stroke-width="5" opacity=".8">
+      <path d="M160 110 c-14 -18 14 -30 0 -50"/>
+      <path d="M232 104 c-14 -20 16 -32 2 -54 c-8 -12 4 -22 2 -30"/>
+    </g>
+
+    <!-- shadow -->
+    <ellipse cx="208" cy="342" rx="150" ry="20" fill="#3B2416" opacity=".18"/>
+
+    <!-- lacquer bowl -->
+    <path d="M42 178 C46 278 122 336 200 336 C278 336 354 278 358 178 Z" fill="#A9432B"/>
+    <path d="M42 178 C46 278 122 336 200 336 C278 336 354 278 358 178 Z" fill="url(#hatch)"/>
+    <path d="M58 226 C110 262 290 262 342 226" fill="none" stroke="#E3A512" stroke-width="6"/>
+    <g fill="none" stroke="#E3A512" stroke-width="3.5">
+      <path d="M110 268 q10 -14 20 0 q10 14 20 0"/><path d="M180 280 q10 -14 20 0 q10 14 20 0"/>
+      <path d="M250 268 q10 -14 20 0 q10 14 20 0"/>
+    </g>
+    <path d="M150 330 Q200 350 250 330" fill="none" stroke="#7E2E1C" stroke-width="10"/>
+    <path d="M42 178 C46 278 122 336 200 336 C278 336 354 278 358 178" fill="none" stroke="#4A3426" stroke-width="4"/>
+
+    <!-- rim -->
+    <ellipse cx="200" cy="178" rx="158" ry="58" fill="#8E3522" stroke="#4A3426" stroke-width="4"/>
+
+    <!-- coconut curry broth -->
+    <ellipse cx="200" cy="178" rx="146" ry="50" fill="#EDB940"/>
+    <ellipse cx="200" cy="178" rx="146" ry="50" fill="url(#hatch)"/>
+    <g clip-path="url(#soup)">
+      <!-- wheat noodles -->
+      <g fill="none" stroke="#F7DE8E" stroke-width="7">
+        <path d="M80 182 c20 -16 40 16 60 0 s40 16 60 0 s40 16 60 0 s40 16 60 0"/>
+        <path d="M96 200 c18 -14 36 14 54 0 s36 14 54 0 s36 14 54 0"/>
+      </g>
+      <g fill="none" stroke="#D59A2A" stroke-width="2.5" opacity=".7">
+        <path d="M80 186 c20 -16 40 16 60 0 s40 16 60 0 s40 16 60 0 s40 16 60 0"/>
+      </g>
+      <!-- chili oil drops -->
+      <g fill="#C8452B">
+        <circle cx="120" cy="160" r="4"/><circle cx="270" cy="206" r="4"/><circle cx="310" cy="170" r="3.5"/>
+        <circle cx="160" cy="210" r="3.5"/><circle cx="236" cy="150" r="3"/>
+      </g>
+    </g>
+
+    <!-- crispy noodles on top -->
+    <path d="M146 156 q-2 -22 30 -26 q34 -2 38 16 q2 18 -32 20 q-34 2 -36 -10z" fill="#D9962F" stroke="#4A3426" stroke-width="3"/>
+    <g fill="none" stroke="#F3C766" stroke-width="3">
+      <path d="M156 150 q10 -10 22 -4 q10 6 22 -2"/><path d="M160 160 q12 -8 24 -2 q8 4 20 -4"/>
+      <path d="M168 140 q8 6 18 0"/>
+    </g>
+
+    <!-- boiled egg half -->
+    <g stroke="#4A3426" stroke-width="3">
+      <ellipse cx="268" cy="166" rx="26" ry="16" fill="#FFFDF6"/>
+    </g>
+    <ellipse cx="268" cy="166" rx="11" ry="7.5" fill="#F2B632"/>
+
+    <!-- sliced shallots -->
+    <g fill="none" stroke="#B5567A" stroke-width="3">
+      <ellipse cx="110" cy="182" rx="10" ry="6"/><ellipse cx="128" cy="192" rx="8" ry="5"/>
+      <ellipse cx="300" cy="196" rx="9" ry="5.5"/>
+    </g>
+
+    <!-- coriander -->
+    <g fill="#4E9A4B">
+      <path d="M206 168 q8 -12 16 0 q-8 8 -16 0z"/>
+      <path d="M218 178 q10 -6 14 6 q-10 4 -14 -6z"/>
+      <path d="M96 166 q8 -12 16 0 q-8 8 -16 0z"/>
+      <path d="M240 198 q8 -10 14 0 q-8 6 -14 0z"/>
+    </g>
+
+    <!-- lime wedge on the rim -->
+    <path d="M36 150 a26 26 0 0 1 46 -14 z" fill="#9BC53D" stroke="#4A3426" stroke-width="3"/>
+    <path d="M42 147 a20 20 0 0 1 35 -11 z" fill="#D9EC8C"/>
+  </g>
+</svg>

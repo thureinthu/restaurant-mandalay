@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <filter id="wax" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="21" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="4" xChannelSelector="R" yChannelSelector="G" result="wobbly"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="2" seed="22" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 2.5" result="mask"/>
+      <feComposite in="wobbly" in2="mask" operator="in"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#wax)" stroke-linecap="round" stroke-linejoin="round">
+    <!-- steam -->
+    <g fill="none" stroke="#B9AFA2" stroke-width="7">
+      <path d="M78 52 c-10 -12 10 -20 0 -34"/>
+      <path d="M118 52 c-10 -12 10 -20 0 -34"/>
+    </g>
+    <!-- clay pot -->
+    <path d="M30 96 Q28 172 100 176 Q172 172 170 96 Z" fill="#B8572F" stroke="#4A3426" stroke-width="6"/>
+    <path d="M44 120 Q100 136 156 120" fill="none" stroke="#E3A512" stroke-width="6"/>
+    <!-- handles -->
+    <path d="M30 106 q-18 0 -16 16 q2 10 16 8" fill="none" stroke="#4A3426" stroke-width="7"/>
+    <path d="M170 106 q18 0 16 16 q-2 10 -16 8" fill="none" stroke="#4A3426" stroke-width="7"/>
+    <!-- lid -->
+    <path d="M24 96 Q100 60 176 96 Z" fill="#CF6C3E" stroke="#4A3426" stroke-width="6"/>
+    <circle cx="100" cy="72" r="9" fill="#8E3522" stroke="#4A3426" stroke-width="5"/>
+  </g>
+</svg>

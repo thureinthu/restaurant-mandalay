@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340" width="340" height="340">
+  <defs>
+    <filter id="wax" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="8" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="5" xChannelSelector="R" yChannelSelector="G" result="wobbly"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="19" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 2.5" result="mask"/>
+      <feComposite in="wobbly" in2="mask" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#3B2416" stroke-opacity=".16" stroke-width="2.6"/>
+    </pattern>
+  </defs>
+
+  <g filter="url(#wax)" stroke-linecap="round" stroke-linejoin="round" transform="translate(20 0)">
+    <!-- steam -->
+    <g fill="none" stroke="#B9AFA2" stroke-width="5" opacity=".8">
+      <path d="M128 92 c-12 -16 12 -26 0 -44 c-8 -12 4 -20 2 -30"/>
+      <path d="M172 92 c-12 -16 14 -28 2 -46"/>
+    </g>
+
+    <!-- saucer -->
+    <ellipse cx="150" cy="296" rx="128" ry="28" fill="#F4ECDC" stroke="#4A3426" stroke-width="4"/>
+    <ellipse cx="150" cy="292" rx="80" ry="14" fill="none" stroke="#DCCDB2" stroke-width="4"/>
+
+    <!-- glass of milk tea -->
+    <path d="M72 116 L96 286 Q150 302 204 286 L228 116 Z" fill="#C68B57"/>
+    <path d="M72 116 L96 286 Q150 302 204 286 L228 116 Z" fill="url(#hatch)"/>
+    <!-- glass reflections -->
+    <path d="M96 140 L112 270" fill="none" stroke="#F3E4CC" stroke-width="7" opacity=".85"/>
+    <path d="M118 150 L126 210" fill="none" stroke="#F3E4CC" stroke-width="4" opacity=".7"/>
+    <path d="M72 116 L96 286 Q150 302 204 286 L228 116" fill="none" stroke="#4A3426" stroke-width="4"/>
+    <!-- foamy top -->
+    <ellipse cx="150" cy="116" rx="78" ry="17" fill="#EBD3AA" stroke="#4A3426" stroke-width="4"/>
+    <g fill="#F7E9CE"><circle cx="128" cy="114" r="4"/><circle cx="160" cy="120" r="3.5"/><circle cx="182" cy="112" r="3"/><circle cx="110" cy="120" r="3"/></g>
+
+    <!-- spoon on the saucer -->
+    <path d="M214 300 L270 282" fill="none" stroke="#9A9184" stroke-width="6"/>
+    <ellipse cx="206" cy="303" rx="13" ry="7" fill="#B8B0A3" stroke="#4A3426" stroke-width="2.5" transform="rotate(-18 206 303)"/>
+  </g>
+</svg>

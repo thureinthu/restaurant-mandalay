@@ -57,6 +57,7 @@
   --jade-ink: #F6F1DF;  /* text on --jade */
   --gold: #E3A512;
   --chili: #B3261E;
+  --leaf: #2F7A4D;      /* vegan tag; white text on it passes contrast in both themes */
 
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
@@ -159,28 +160,74 @@ nav.open .burger span:nth-child(1) { transform: translateY(calc(.6rem + 2px)) ro
 nav.open .burger span:nth-child(2) { opacity: 0; }
 nav.open .burger span:nth-child(3) { transform: translateY(calc(-.6rem - 2px)) rotate(-45deg); }
 
+/* Call + e-mail buttons: only shown in the full-screen mobile menu */
+nav .menu-extra { display: none; }
+
 @media (max-width: 1024px) {
+  html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 4.5rem); }
+  html.menu-open { overflow: hidden; }
+
   nav { flex-wrap: nowrap; }
   .burger { display: block; }
+  /* Logo + burger stay on top of the open menu (the burger becomes the ✕) */
+  .logo, .burger { position: relative; z-index: 41; }
+
+  /* Full-screen menu in brand red */
   nav ul {
-    display: none;
-    position: absolute;
-    top: 3.5rem;
-    right: 0;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
     flex-direction: column;
-    gap: 0;
-    background: var(--bg);
-    color: var(--ink);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    padding: .5rem;
-    min-width: 13rem;
-    z-index: 5;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: .25rem;
+    text-align: center;
+    padding: calc(env(safe-area-inset-top, 0px) + 6rem) 1.5rem calc(env(safe-area-inset-bottom, 0px) + 2rem);
+    overflow-y: auto;
+    background: var(--jade);
+    color: var(--jade-ink);
+    visibility: hidden;
+    opacity: 0;
   }
-  nav.open ul { display: flex; }
-  nav ul a { display: block; padding: .75rem 1rem; border-radius: .6rem; }
-  nav ul a:hover { color: var(--ink); background: var(--surface); }
+  nav.open ul { visibility: visible; opacity: 1; }
+  nav ul a {
+    display: block;
+    padding: .35rem 0;
+    font-family: "Young Serif", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 9vw, 2.75rem);
+    line-height: 1.2;
+  }
+  nav ul a:hover { color: var(--gold); }
+
+  /* Links centred vertically: the free space is split above the first link and
+     above the call button, which sits at the bottom */
+  nav ul li:first-child { margin-top: auto; }
+  nav .menu-extra { display: flex; justify-content: center; margin-top: auto; padding-top: 2rem; }
+  nav ul .menu-extra .btn { display: inline-block; padding: .85rem 1.5rem; font: 600 1.05rem/1.4 Figtree, system-ui, sans-serif; }
+  nav ul .menu-extra .btn.primary:hover { color: #1E2A26; }
+  nav ul .menu-extra .btn.ghost:hover { color: var(--jade-ink); }
+
+  /* Slim bar that slides in when scrolling up (js/main.js sets the classes) */
+  .hero .wrap > nav.is-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: calc(env(safe-area-inset-top, 0px) + .6rem) 1.5rem .6rem;
+    background: var(--jade);
+    color: var(--jade-ink);
+    box-shadow: 0 6px 20px -10px rgb(0 0 0 / .45);
+    transform: translateY(-110%);
+  }
+  /* "none" (not translateY(0)) so the open menu inside is fixed to the screen, not the bar */
+  .hero .wrap > nav.is-fixed.is-shown { transform: none; }
+}
+
+@media (max-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  nav ul { transition: opacity .25s ease, visibility .25s ease; }
+  .hero .wrap > nav.is-fixed { transition: transform .25s ease; }
 }
 
 .mingalaba {
@@ -207,49 +254,53 @@ nav.open .burger span:nth-child(3) { transform: translateY(calc(-.6rem - 2px)) r
 .btn.primary:hover { background: #F0B72B; }
 .btn.ghost { color: var(--jade-ink); }
 .btn.ghost:hover { background: rgba(255, 255, 255, .1); }
+/* Opens another website in a new tab */
+.btn.ext::after { content: " ↗"; }
 
-/* Decorative bowl graphic */
-.bowl {
+/* Wax crayon drawings (assets/images/drawings/), purely decorative ---------- */
+/* Hero: bowl of Mohinga at the right, behind the text */
+.hero-art {
   position: absolute;
   z-index: 0;
+  right: max(1rem, calc(50% - 500px));
+  bottom: 2.5rem;
+  width: min(26rem, 36vw);
+  height: auto;
   pointer-events: none;
-  right: -8rem;
-  bottom: -9rem;
-  width: 26rem;
-  height: 26rem;
-  border-radius: 50%;
-  background: radial-gradient(circle closest-side at 50% 50%,
-    var(--jade) 0 27%, var(--gold) 27% 30%, var(--jade) 30% 40%, var(--chili) 40% 43%,
-    var(--jade) 43% 54%, var(--gold) 54% 57%, var(--jade) 57% 68%, var(--chili) 68% 71%,
-    transparent 71%);
-  opacity: .55;
 }
-@media (max-width: 900px) {
-  .bowl {
+@media (max-width: 999px) {
+  .hero-art {
     position: relative;
     right: auto;
     bottom: auto;
-    width: 18rem;
-    max-width: 80vw;
-    height: auto;
-    aspect-ratio: 1;
-    margin: 3rem auto -12rem;
+    display: block;
+    width: min(18rem, 70vw);
+    margin: 2.5rem auto 0;
   }
 }
 
 /* Über uns ----------------------------------------------------------------- */
-.about { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 3rem; align-items: start; }
 .about h2 { font-size: clamp(2rem, 4.5vw, 3rem); }
 .about p { margin: 0 0 1rem; max-width: 34rem; }
 
-.facts { margin: 0; padding: 0 0 0 1.5rem; list-style: none; border-left: 4px solid var(--gold); }
-.facts li { padding: .6rem 0; border-bottom: 1px solid var(--line); }
-.facts li:last-child { border: 0; }
+/* The three points: one row below headline + text, each with its own gold line */
+.facts {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem 3rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.facts li { padding: .25rem 0 .25rem 1.25rem; border-left: 4px solid var(--gold); }
 .facts strong { display: block; font-family: "Young Serif", serif; font-weight: 400; font-size: 1.2rem; }
 .facts span { color: var(--muted); }
 
 @media (max-width: 760px) {
-  .about { grid-template-columns: 1fr; }
+  .about, .facts { grid-template-columns: 1fr; }
+  .facts { margin-top: .5rem; }
 }
 
 /* Speisekarte -------------------------------------------------------------- */
@@ -257,14 +308,142 @@ nav.open .burger span:nth-child(3) { transform: translateY(calc(-.6rem - 2px)) r
 .menu h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: .5rem; }
 .menu .sub { color: var(--muted); margin: 0 0 2.5rem; max-width: 38rem; }
 
-.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4rem; }
-.cols h3 { font-size: 1.5rem; margin: 2rem 0 .5rem; color: var(--jade); }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .cols h3 { color: var(--gold); }
+/* Category tabs (switched on by js/main.js) */
+.menu-tabs {
+  display: flex;
+  gap: .5rem;
+  overflow-x: auto;
+  margin: 0 -1.5rem 1.5rem;
+  padding: .25rem 1.5rem;
+  scrollbar-width: none;
+}
+.menu-tabs[hidden] { display: none; }
+.menu-tabs::-webkit-scrollbar { display: none; }
+.menu-tabs button {
+  flex: none;
+  font: inherit;
+  font-weight: 600;
+  padding: .5rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+}
+.menu-tabs button:hover { border-color: var(--jade); }
+.menu-tabs button[aria-selected="true"] { background: var(--jade); border-color: var(--jade); color: var(--jade-ink); }
+
+/* "Hauptgerichte | ▾": one pill, the tab part shows all main courses, the
+   arrow part opens the filter */
+.menu-tabs .split {
+  flex: none;
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink);
+}
+.menu-tabs .split:hover { border-color: var(--jade); }
+.menu-tabs .split:has([aria-selected="true"]) { background: var(--jade); border-color: var(--jade); color: var(--jade-ink); }
+.menu-tabs .split > button { border: 0; background: none; color: inherit; }
+.menu-tabs .split > button:hover { background: color-mix(in srgb, currentColor 8%, transparent); }
+.menu-tabs .split > [role="tab"] { padding-right: .45rem; border-radius: 999px 0 0 999px; }
+.menu-tabs .split > .picker-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: .5rem 1rem .5rem .45rem;
+  border-radius: 0 999px 999px 0;
 }
 
-.dish { padding: .9rem 0; border-bottom: 1px solid var(--line); }
+/* Mouse drag-to-scroll for the tab row (js/main.js; touch scrolls natively) */
+.menu-tabs.can-drag { cursor: grab; }
+.menu-tabs.is-dragging { cursor: grabbing; user-select: none; }
+.menu-tabs.is-dragging button { cursor: grabbing; }
+
+.menu-panel h3, .menu-panel h4 { font-family: "Young Serif", Georgia, serif; font-weight: 400; color: var(--jade); }
+.menu-panel h3 { font-size: 1.5rem; margin: 2rem 0 .5rem; }
+.menu-panel h4 { font-size: 1.5rem; margin: 1.75rem 0 .25rem; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .menu-panel h3,
+  :root:not([data-theme="light"]) .menu-panel h4 { color: var(--gold); }
+}
+:root[data-theme="dark"] .menu-panel h3,
+:root[data-theme="dark"] .menu-panel h4 { color: var(--gold); }
+
+/* Hidden visually, still read by screen readers. With tabs on, the tab already
+   names the category, so panel headings use this too (subheadings stay visible). */
+.sr-only,
+.menu.is-tabbed .menu-panel > h3 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Main course filter list, opened from the arrow next to "Hauptgerichte".
+   js/main.js lines it up under the pill (sets "left"). */
+.menu-nav { position: relative; }
+/* Chevron, drawn with borders so it follows the text color */
+.picker-toggle::after {
+  content: "";
+  width: .4em;
+  height: .4em;
+  margin-top: -.2em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+.picker-toggle[aria-expanded="true"]::after { transform: translateY(.2em) rotate(-135deg); }
+
+.picker-list {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + .5rem);
+  left: 0;
+  min-width: 17rem;
+  max-width: calc(100vw - 3rem);
+  margin: 0;
+  padding: .5rem;
+  list-style: none;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  box-shadow: 0 18px 40px -16px rgb(0 0 0 / .3);
+}
+.picker-list[hidden] { display: none; }
+.picker-list button {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-weight: 500;
+  text-align: left;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  border-radius: .5rem;
+  padding: .55rem .85rem;
+  cursor: pointer;
+}
+.picker-list button:hover,
+.picker-list button[aria-pressed="true"] { background: var(--surface); }
+.picker-list button[aria-pressed="true"] { font-weight: 600; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .picker-toggle::after { transition: transform .2s ease; }
+  .picker-list:not([hidden]) { animation: picker-in .16s ease-out; }
+  @keyframes picker-in { from { opacity: 0; transform: translateY(-.35rem); } }
+}
+
+/* Two columns filled top to bottom (first half left, second half right), so
+   every dish sits right under the previous one */
+.dishes { columns: 2; column-gap: 4rem; }
+
+.dish { padding: .9rem 0; border-bottom: 1px solid var(--line); break-inside: avoid; }
 .dish .top { display: flex; justify-content: space-between; gap: 1rem; font-weight: 600; }
+/* Number, name and tags on one vertically centred line; tags wrap below if needed */
+.dish .name { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .4rem; }
 .dish .name em {
   font-style: normal;
   font-family: "Noto Sans Myanmar", sans-serif;
@@ -274,6 +453,12 @@ nav.open .burger span:nth-child(3) { transform: translateY(calc(-.6rem - 2px)) r
   margin-left: .4rem;
 }
 .dish p { margin: .2rem 0 0; color: var(--muted); font-size: .98rem; }
+.dish .no { color: var(--muted); font-size: .85em; font-variant-numeric: tabular-nums; margin-right: .1rem; }
+.dish .price { white-space: nowrap; text-align: right; }
+.dish .allergens { color: var(--muted); font-size: .75rem; font-weight: 500; margin-right: .6rem; }
+.dish .translit { font-style: italic; font-size: .92rem; margin-top: .05rem; }
+.dish .note { color: var(--ink); font-size: .92rem; }
+.dish .en { font-size: .88rem; opacity: .85; }
 
 .tag {
   display: inline-block;
@@ -281,27 +466,104 @@ nav.open .burger span:nth-child(3) { transform: translateY(calc(-.6rem - 2px)) r
   font-weight: 600;
   padding: .05rem .5rem;
   border-radius: 4px;
-  margin-left: .4rem;
-  vertical-align: middle;
+  line-height: 1.5;
 }
-.tag.v { background: var(--jade); color: var(--jade-ink); }
+.tag.v { background: var(--leaf); color: #fff; }
 .tag.h { background: var(--chili); color: #fff; }
 
-.legend { margin-top: 2rem; color: var(--muted); font-size: .95rem; }
+.legend { margin-top: 2.5rem; color: var(--muted); font-size: .95rem; }
+.legend p { margin: 0 0 .5rem; }
+.legend strong { color: var(--ink); }
+.allergen-key {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: .2rem 1.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
 
 @media (max-width: 760px) {
-  .cols { grid-template-columns: 1fr; }
+  .dishes { columns: 1; }
 }
 
 /* Besuch ------------------------------------------------------------------- */
-.visit { max-width: 44rem; }
 .visit h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 1.5rem; }
 
-address { font-style: normal; margin-bottom: 1.5rem; }
+/* Map: static Google Maps screenshot (assets/images/karte-mandalay.jpg).
+   Clicking the map or the button opens Google Maps. */
+.map {
+  position: relative;
+  margin: 0 0 2.5rem;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: var(--surface);
+}
+.map-open { position: relative; display: block; height: 100%; }
+/* object-position keeps Google's "Mandalay" pin in view when the frame is wider */
+.map-open img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 57%; }
+.map-open:focus-visible { outline: none; }
+.map-open::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; }
+.map-open:focus-visible::after { box-shadow: inset 0 0 0 3px var(--gold); }
+.map-gmaps {
+  position: absolute;
+  right: .75rem;
+  bottom: .75rem;
+  padding: .5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: .92rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 18px -8px rgb(0 0 0 / .35);
+}
+.map-gmaps::after { content: " ↗"; }
+.map-gmaps:hover { border-color: var(--jade); }
+.map-credit {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: .15rem .6rem;
+  border-top-right-radius: .6rem;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  color: var(--muted);
+  font-size: .72rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .map-open img { filter: brightness(.85); }
+}
+:root[data-theme="dark"] .map-open img { filter: brightness(.85); }
+
+/* Opening hours and reservation box: side by side on wider screens */
+.visit-info { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 4rem; align-items: start; }
+.visit .visit-info .box { margin-top: 0; }
+@media (min-width: 761px) {
+  .map { aspect-ratio: 21 / 9; }
+}
+@media (max-width: 760px) {
+  .visit-info { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .map-open img { transition: transform .4s ease; }
+  .map-open:hover img { transform: scale(1.03); }
+}
 
 .hours { width: 100%; border-collapse: collapse; }
 .hours td { padding: .55rem 0; border-bottom: 1px solid var(--line); }
 .hours td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Address under the opening hours: small label + address, set apart from the time rows */
+.hours-address { margin: 1.25rem 0 0; font-weight: 600; }
+.hours-address .label {
+  display: block;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
 
 .visit .box { background: var(--jade); color: var(--jade-ink); padding: 2rem; border-radius: 1.25rem; margin-top: 2rem; }
 .visit .box h3 { font-size: 1.6rem; margin-bottom: .75rem; }

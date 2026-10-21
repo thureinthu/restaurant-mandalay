@@ -46,6 +46,11 @@
 						<li><a href="#uns">Über uns</a></li>
 						<li><a href="#karte">Speisekarte</a></li>
 						<li><a href="#besuch">Besuch</a></li>
+						<!-- Only in the full-screen mobile menu -->
+						<li class="menu-extra btns">
+							<a class="btn primary" href="tel:+492215101296">0221 510 12 96</a>
+							<a class="btn ghost ext" href="https://www.opentable.de/restref/client/?rid=516183&amp;restref=516183&amp;lang=de-DE" target="_blank" rel="noopener">Online reservieren</a>
+						</li>
 					</ul>
 				</nav>
 				<p class="mingalaba" lang="my">မင်္ဂလာပါ</p>
@@ -63,17 +68,23 @@
 					>
 				</div>
 			</div>
-			<div class="bowl" aria-hidden="true"></div>
+			<img
+				class="hero-art"
+				src="assets/images/drawings/mohinga.svg"
+				alt=""
+				width="400"
+				height="400"
+			/>
 		</header>
 
 		<main>
 			<section id="uns">
 				<div class="wrap about">
+					<h2>
+						Ein Familienbetrieb, drei Generationen
+						Rezepte
+					</h2>
 					<div>
-						<h2>
-							Ein Familienbetrieb, drei Generationen
-							Rezepte
-						</h2>
 						<p>
 							Mandalay war die letzte Königsstadt Burmas
 							und gilt bis heute als kulturelles Herz des
@@ -119,200 +130,967 @@
 			<section id="karte" class="menu">
 				<div class="wrap">
 					<h2>Speisekarte</h2>
-					<p class="sub">
-						Eine Auswahl unserer Klassiker. Am besten
-						bestellen Sie mehrere Gerichte und teilen, so wie
-						wir es zu Hause tun.
+					<p>
+						Zu allen Gerichten servieren wir Basmati-Reis. Wir verwenden keine
+						Geschmacksverstärker, Farbstoffe oder Konservierungsmittel. Bitte sprechen Sie uns an wenn Sie spezielle Wünsche oder Allergien haben.
 					</p>
-					<div class="cols">
-						<div>
-							<h3>Zum Anfangen</h3>
-							<div class="dish">
-								<div class="top">
-									<span class="name"
-										>Lahpet Thoke<em
-											>လက်ဖက်သုပ်</em
-										><span class="tag v"
-											>vegan</span
-										></span
-									><span>9,50 €</span>
-								</div>
-								<p>
-									Fermentierter Teeblattsalat mit
-									knusprigen Bohnen, Erdnüssen,
-									Sesam, Tomate und Limette.
-								</p>
-							</div>
-							<div class="dish">
-								<div class="top">
-									<span class="name"
-										>Samosa Thoke<span
-											class="tag v"
-											>vegan</span
-										></span
-									><span>8,90 €</span>
-								</div>
-								<p>
-									Hausgemachte Samosas auf Kohl und
-									Gurke, mit Kichererbsenbrühe und
-									Chili.
-								</p>
-							</div>
-							<div class="dish">
-								<div class="top">
-									<span class="name"
-										>Bohnen-Fritters<span
-											class="tag v"
-											>vegan</span
-										></span
-									><span>6,90 €</span>
-								</div>
-								<p>
-									Knusprig frittiert, dazu
-									Tamarinden-Dip.
-								</p>
-							</div>
 
-							<h3>Suppen &amp; Nudeln</h3>
+					<!-- Content from material/finale%20Speisekarte.pdf. Tabs + the
+					     Hauptgerichte filter are switched on by js/main.js; without
+					     JavaScript, all categories show as one list. -->
+					<div class="menu-nav">
+						<div class="menu-tabs" role="tablist" aria-label="Kategorien" hidden>
+							<button type="button" role="tab" id="tab-vorspeisen" aria-controls="panel-vorspeisen" aria-selected="true">Vorspeisen</button>
+							<button type="button" role="tab" id="tab-empfehlungen" aria-controls="panel-empfehlungen" aria-selected="false" tabindex="-1">Empfehlungen</button>
+							<span class="split">
+								<button type="button" role="tab" id="tab-hauptgerichte" aria-controls="panel-hauptgerichte" aria-selected="false" tabindex="-1">Hauptgerichte</button>
+								<button type="button" class="picker-toggle" aria-label="Hauptgerichte filtern" aria-haspopup="true" aria-expanded="false" aria-controls="art-list" tabindex="-1"></button>
+							</span>
+							<button type="button" role="tab" id="tab-menues" aria-controls="panel-menues" aria-selected="false" tabindex="-1">Menüs</button>
+							<button type="button" role="tab" id="tab-desserts" aria-controls="panel-desserts" aria-selected="false" tabindex="-1">Desserts</button>
+						</div>
+						<!-- Filter for main course types, opened from the arrow next to
+						     "Hauptgerichte". Sits outside the tab row so the row's sideways
+						     scrolling doesn't cut it off. -->
+						<ul class="picker-list" id="art-list" aria-label="Hauptgerichte filtern" hidden>
+							<li><button type="button" data-value="alle" aria-pressed="true">Alle Hauptgerichte</button></li>
+							<li><button type="button" data-value="reis-nudeln" aria-pressed="false">Reis- &amp; Nudelgerichte</button></li>
+							<li><button type="button" data-value="meeresfruechte" aria-pressed="false">Meeresfrüchte &amp; Fisch</button></li>
+							<li><button type="button" data-value="haehnchen" aria-pressed="false">Hähnchen</button></li>
+							<li><button type="button" data-value="ente" aria-pressed="false">Ente</button></li>
+							<li><button type="button" data-value="rind" aria-pressed="false">Rind</button></li>
+							<li><button type="button" data-value="vegetarisch" aria-pressed="false">Vegetarisch</button></li>
+						</ul>
+					</div>
+
+					<div class="menu-panel" id="panel-vorspeisen" role="tabpanel" aria-labelledby="tab-vorspeisen">
+						<h3>Vorspeisen</h3>
+						<h4>Suppen</h4>
+						<div class="dishes">
 							<div class="dish">
 								<div class="top">
-									<span class="name"
-										>Mohinga<em
-											>မုန့်ဟင်းခါး</em
-										></span
-									><span>11,90 €</span>
+									<span class="name"><span class="no">1</span>Rindfleisch-Suppe<span class="tag h">scharf</span></span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4, 7</small>5,00 €</span>
 								</div>
-								<p>
-									Das burmesische Frühstück:
-									Reisnudeln in Fischbrühe mit
-									Zitronengras, Bananenstamm und Ei.
-								</p>
+								<p class="translit">Ame: Dha Hin: Gjou</p>
+								<p class="en" lang="en">Beef soup</p>
 							</div>
 							<div class="dish">
 								<div class="top">
-									<span class="name"
-										>Ohn No Khao Swe</span
-									><span>13,50 €</span>
+									<span class="name"><span class="no">2</span>Garnelen-Suppe<span class="tag h">pikant</span></span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 3, 4</small>5,00 €</span>
 								</div>
-								<p>
-									Weizennudeln in
-									Kokosnuss-Hühnercurry mit Ei,
-									Zwiebel und Koriander.
-								</p>
+								<p class="translit">Bazun Hin: Gjou</p>
+								<p class="en" lang="en">Prawn soup</p>
 							</div>
 							<div class="dish">
 								<div class="top">
-									<span class="name"
-										>Shan Nudeln<span
-											class="tag h"
-											>scharf</span
-										></span
-									><span>12,50 €</span>
+									<span class="name"><span class="no">3</span>Curry-Suppe<span class="tag h">pikant</span></span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4</small>5,00 €</span>
 								</div>
-								<p>
-									Reisnudeln mit Hähnchen oder Tofu,
-									Tomatensauce und eingelegtem
-									Senfgemüse.
-								</p>
+								<p class="en" lang="en">Curry soup</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">4</span>Tomatensuppe</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4</small>5,00 €</span>
+								</div>
+								<p class="translit">Khajan: Gjin Dhi: Hin: Gjou</p>
+								<p class="en" lang="en">Tomato soup</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">5</span>Won-Ton-Suppe</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4</small>5,00 €</span>
+								</div>
+								<p class="translit">Atha: Loun: Hin: Gjou</p>
+								<p class="en" lang="en">Wonton soup</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">6</span>Peking-Suppe</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4</small>4,00 €</span>
+								</div>
+								<p class="en" lang="en">Peking soup</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">7</span>Miso-Shiro-Suppe<span class="tag v">vegan</span></span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 5</small>4,00 €</span>
+								</div>
+								<p class="en" lang="en">Miso shiro soup</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">8</span>Gemüsesuppe<span class="tag v">vegan</span></span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7</small>4,00 €</span>
+								</div>
+								<p class="translit">Athi: Soun Hin: Gjou</p>
+								<p class="en" lang="en">Vegetable soup</p>
 							</div>
 						</div>
-						<div>
-							<h3>Currys &amp; Hauptgerichte</h3>
+						<h4>Beilagen</h4>
+						<div class="dishes">
 							<div class="dish">
 								<div class="top">
-									<span class="name"
-										>Kyet Thar Hin</span
-									><span>14,90 €</span>
+									<span class="name"><span class="no">9</span>Krupuk (Krabbenbrot)</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>3</small>3,50 €</span>
 								</div>
-								<p>
-									Hähnchencurry nach Hausart, langsam
-									geschmort, mit Reis und
-									Linsensuppe.
-								</p>
+								<p class="en" lang="en">Krupuk (prawn crackers)</p>
 							</div>
 							<div class="dish">
 								<div class="top">
-									<span class="name">Wetha Hin</span
-									><span>15,90 €</span>
+									<span class="name"><span class="no">10</span>Frühlingsrollen mit süß-saurer Soße<span class="tag v">vegan</span></span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>9</small>4,00 €</span>
 								</div>
-								<p>
-									Schweinefleisch mit Tamarinde und
-									Knoblauch, mild-säuerlich.
-								</p>
+								<p class="translit">Ko Pjan. Gjo</p>
+								<p class="en" lang="en">Spring rolls with sweet-and-sour sauce</p>
+							</div>
+						</div>
+						<h4>Salate</h4>
+						<div class="dishes">
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">11</span>Mandalay Bunter Teller<span class="tag v">vegan</span></span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>5, 6, 7</small>6,00 €</span>
+								</div>
+								<p class="translit">Mandalay Ajwe’ Zoun Thou’</p>
+								<p>Blanchierter Brokkoli mit Sojabohnen, Champignons, Paprika, Möhren, Rucola und Dressing nach Art des Hauses</p>
+								<p class="en" lang="en">Blanched broccoli with soybeans, mushrooms, bell pepper, carrots, rocket salad and dressing home style</p>
 							</div>
 							<div class="dish">
 								<div class="top">
-									<span class="name"
-										>Gemüsecurry<span
-											class="tag v"
-											>vegan</span
-										></span
-									><span>12,90 €</span>
+									<span class="name"><span class="no">12</span>Mandalay Bunter Teller mit Hühnerfilet</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>5, 6, 7</small>7,50 €</span>
 								</div>
-								<p>
-									Kürbis, Aubergine und Kartoffel in
-									Zwiebel-Tomaten-Sauce.
-								</p>
+								<p class="translit">Mandalay Kje’ Tha: Ajwe’ Zoun Thou’</p>
+								<p>Hähnchenfilet auf blanchiertem Brokkoli, Sojabohnen, Champignons, Paprika, Möhren, Rucola und Dressing nach Art des Hauses</p>
+								<p class="en" lang="en">Chicken breast on blanched broccoli with soybeans, mushrooms, bell pepper, carrots, rocket salad and dressing home style</p>
 							</div>
 							<div class="dish">
 								<div class="top">
-									<span class="name"
-										>Tofu Kyaw<span class="tag v"
-											>vegan</span
-										></span
-									><span>11,50 €</span>
+									<span class="name"><span class="no">13</span>Garnelen à la Mandalay</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>3, 5, 6, 7</small>9,00 €</span>
 								</div>
-								<p>
-									Shan-Tofu aus Kichererbsen,
-									knusprig gebraten, mit Chili-Dip.
-								</p>
-							</div>
-
-							<h3>Getränke &amp; Süßes</h3>
-							<div class="dish">
-								<div class="top">
-									<span class="name"
-										>Laphet Yay<em
-											>လက်ဖက်ရည်</em
-										></span
-									><span>3,90 €</span>
-								</div>
-								<p>
-									Burmesischer Milchtee, süß und
-									kräftig.
-								</p>
+								<p>Gekochte Garnelen in Kokosnussmilch auf blanchiertem Brokkoli, Sojabohnen, Champignons, Paprika, Möhren, Rucola und Dressing nach Art des Hauses</p>
+								<p class="en" lang="en">Prawns cooked in coconut milk on blanched broccoli with soybeans, mushrooms, bell pepper, carrots, rocket salad and dressing home style</p>
 							</div>
 							<div class="dish">
 								<div class="top">
-									<span class="name">Falooda</span
-									><span>5,90 €</span>
+									<span class="name"><span class="no">14</span>Mandalay Scampi-Salat</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>3, 5, 6, 7</small>10,00 €</span>
 								</div>
-								<p>
-									Rosenmilch mit Basilikumsamen,
-									Nudeln und Eis.
-								</p>
-							</div>
-							<div class="dish">
-								<div class="top">
-									<span class="name"
-										>Shwe Gyi Mont<span
-											class="tag v"
-											>vegan</span
-										></span
-									><span>5,50 €</span>
-								</div>
-								<p>
-									Warmer Grießkuchen mit Kokos und
-									Rosinen.
-								</p>
+								<p class="translit">Mandalay Bazun Thou’</p>
+								<p>Scampi gekocht in Kokosnussmilch auf blanchiertem Brokkoli, Sojabohnen, Champignons, Paprika, Möhren, Rucola und Dressing nach Art des Hauses</p>
+								<p class="en" lang="en">Scampi cooked in coconut milk on blanched broccoli with soybeans, mushrooms, bell pepper, carrots, rocket salad and dressing home style</p>
 							</div>
 						</div>
 					</div>
-					<p class="legend">
-						Bitte sagen Sie uns bei Allergien Bescheid, viele
-						Gerichte enthalten Erdnüsse, Sesam, Fisch und
-						Soja. Preise inkl. MwSt.
-					</p>
+
+					<div class="menu-panel" id="panel-empfehlungen" role="tabpanel" aria-labelledby="tab-empfehlungen">
+						<h3>Empfehlungen des Hauses</h3>
+						<h4>Suppen (klein / groß)</h4>
+						<div class="dishes">
+							<div class="dish">
+								<div class="top">
+									<span class="name">Mont Hin Ga</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4</small>5,00 € / 10,00 €</span>
+								</div>
+								<p>Fisch-Suppe mit Reisnudeln</p>
+								<p class="en" lang="en">Fish soup with rice noodles</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Ohn Noh Kaukswe</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2</small>5,00 € / 10,00 €</span>
+								</div>
+								<p>Kokos-Suppe mit Hühnerfleisch und Nudeln</p>
+								<p class="en" lang="en">Coconut milk soup with chicken and noodles</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Mandalay Kja Zan Che</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4</small>5,00 € / 10,00 €</span>
+								</div>
+								<p>Glasnudel-Suppe mit Hühnerfleisch und einer Variation an Pilzen</p>
+								<p class="en" lang="en">Glass noodle soup with chicken and various mushrooms</p>
+							</div>
+						</div>
+						<h4>Salate</h4>
+						<div class="dishes">
+							<div class="dish">
+								<div class="top">
+									<span class="name">Gjin Thou’</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 3, 5, 6</small>8,50 €</span>
+								</div>
+								<p>Ingwer-Salat, hausgemacht</p>
+								<p class="en" lang="en">Home-style ginger salad</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Lape’ Thou’</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 3, 5</small>8,50 €</span>
+								</div>
+								<p>Teeblätter-Salat, hausgemacht</p>
+								<p class="en" lang="en">Home-style tea leaf salad</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Nan: Gji Thou’</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 2, 3</small>8,50 €</span>
+								</div>
+								<p>Nudel-Salat mit Hühnerfleisch</p>
+								<p class="en" lang="en">Noodle salad with chicken</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Pji Gji Nga Thou’</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 3</small>8,50 €</span>
+								</div>
+								<p>Tintenfisch-Salat mit asiatischen Kräutern</p>
+								<p class="en" lang="en">Calamari salad with Asian herbs</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Kja Zan Thou’</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 3, 6</small>7,50 €</span>
+								</div>
+								<p>Glasnudel-Salat mit frischem Gemüse, Sojabohnen, Kaiserschoten und Spitzkohl</p>
+								<p class="en" lang="en">Glass noodle salad with fresh vegetables, soybeans, mangetout and pointed cabbage</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Tofu Thou’</span>
+									<span class="price">8,50 €</span>
+								</div>
+								<p>Tofu-Salat, hausgemacht (Kichererbsenmehl)</p>
+								<p class="en" lang="en">Home-style tofu salad (chickpea flour)</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Tofu’ Gjo</span>
+									<span class="price">8,00 €</span>
+								</div>
+								<p>Gebratener Tofu, hausgemacht (Kichererbsenmehl)</p>
+								<p class="en" lang="en">Home-style fried tofu (chickpea flour)</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Bu: Dhi: Gjo</span>
+									<span class="price">8,00 €</span>
+								</div>
+								<p>Gebratene Zucchini, hausgemacht</p>
+								<p class="en" lang="en">Home-style fried courgette</p>
+							</div>
+						</div>
+						<h4>Hauptspeisen</h4>
+						<div class="dishes">
+							<div class="dish">
+								<div class="top">
+									<span class="name">Tofu Koun: Baung<span class="tag v">vegan</span></span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>5, 7</small>13,50 €</span>
+								</div>
+								<p>Gebackener Tofu mit Sesam und Sojasoße, Tomaten, Brokkoli, Blumenkohl, Möhren, Porree, Pak Choi</p>
+								<p class="en" lang="en">Fried tofu with sesame and soy sauce, tomatoes, broccoli, cauliflower, carrots, leeks, pak choi</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Kalabe Thi: Zoun Chin Jei<span class="tag v">vegan</span></span>
+									<span class="price">13,50 €</span>
+								</div>
+								<p>Gemüseeintopf mit Kichererbsen</p>
+								<p class="en" lang="en">Vegetable stew with chickpeas</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Gazun Jwe’ Ngwe Hninn Hmon<span class="tag v">vegan</span></span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>7</small>14,00 €</span>
+								</div>
+								<p>Morning Glory (Wasserspinat) mit Austernpilzen</p>
+								<p class="en" lang="en">Morning glory (water spinach) with oyster mushrooms</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Gazun Jwe’ Bazun</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>3, 7</small>15,00 €</span>
+								</div>
+								<p>Morning Glory (Wasserspinat) mit Garnelen</p>
+								<p class="en" lang="en">Morning glory (water spinach) with prawns</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Nga: Hsi Bjan</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4</small>14,00 €</span>
+								</div>
+								<p>Fisch (Lachs oder Kabeljau, nach Wahl) nach Art des Hauses mit Tomaten</p>
+								<p class="en" lang="en">Fish (salmon or cod of your choice) home style, tomatoes</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Pji Gji Nga Hsi Bjan</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4, 8</small>14,00 €</span>
+								</div>
+								<p>Tintenfisch spezial in pikanter Soße mit Tomaten, Zucchini, Europagras-Kräutern</p>
+								<p class="en" lang="en">Special calamari in spicy sauce with tomatoes, courgette, herbs</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Nga Gjo Hna’</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4</small>22,00 €</span>
+								</div>
+								<p>Loup de Mer (Wolfsbarsch) in pikanter Soße mit Tomaten, Zucchini, asiatischen Kräutern</p>
+								<p class="en" lang="en">Loup de mer (sea bass) in spicy sauce with tomatoes, courgette, Burmese herbs</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Nga Koun: Baung</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4</small>22,00 €</span>
+								</div>
+								<p>Loup de Mer (Wolfsbarsch) gebacken mit Gemüse, Tomaten, Zucchini, Europagras</p>
+								<p class="en" lang="en">Loup de mer (sea bass) baked with vegetables, tomatoes, courgette, long coriander</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Ame: Dha Joun: Badi Hsi Bjan</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4</small>15,50 €</span>
+								</div>
+								<p>Rindercurry mit Kichererbsen und Okraschoten</p>
+								<p class="en" lang="en">Beef curry with chickpeas and okra</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Ame: Dha Ar Lu: Hsi Bjan</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4</small>15,50 €</span>
+								</div>
+								<p>Rindercurry mit Kartoffeln</p>
+								<p class="en" lang="en">Beef curry with potatoes</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Thou: Dha Hin</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4</small>21,00 €</span>
+								</div>
+								<p>Lammfilet-Curry mit Zucchini, Kaiserschoten, Brokkoli, Blumenkohl, Champignons, Paprika, Möhren, frischer Minze</p>
+								<p class="en" lang="en">Lamb fillet curry with courgette, mangetout, broccoli, cauliflower, mushrooms, bell pepper, carrots, fresh mint</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Kje’ Tha Asein: Gjo</span>
+									<span class="price">14,00 €</span>
+								</div>
+								<p>Hähnchenbrustfilet mit kurz gebratenem frischem Gemüse in milder Soße mit Baby-Pak-Choi, Brokkoli, Blumenkohl, Möhren, Tomaten, Kaiserschoten, Prinzessbohnen</p>
+								<p class="note">Auch vegan erhältlich: 13,50 €</p>
+								<p class="en" lang="en">Chicken breast in mild sauce with briefly roasted fresh vegetables, baby pak choi, broccoli, cauliflower, carrots, tomatoes, mangetout, bush beans</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name">Kje’ Tha Ka La Dha: Gje’</span>
+									<span class="price">14,00 €</span>
+								</div>
+								<p>Hähnchenfilet in Fischsoße mit Zucchini</p>
+								<p class="en" lang="en">Chicken in fish sauce with courgette</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-panel" id="panel-hauptgerichte" role="tabpanel" aria-labelledby="tab-hauptgerichte">
+						<h3>Hauptgerichte</h3>
+						<div class="menu-group" data-group="reis-nudeln">
+							<h4>Reis- &amp; Nudelgerichte</h4>
+							<div class="dishes">
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">20</span>Gebratener Reis mit Scampi</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 7</small>20,00 €</span>
+									</div>
+									<p class="translit">Bazun Dou’ Htamin: Gjo</p>
+									<p>Scampi, Brokkoli, Blumenkohl, Kaiserschoten, Möhren, Paprika, Mais</p>
+									<p class="en" lang="en">Fried rice with scampi, broccoli, cauliflower, mangetout, carrots, bell pepper, corn</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">21</span>Gebratene Nudeln mit Scampi</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 3, 4, 7</small>20,00 €</span>
+									</div>
+									<p class="translit">Bazun Dou’ Khau’ Hswe: Gjo</p>
+									<p>Scampi, Sojabohnen, Brokkoli, Blumenkohl, Kaiserschoten, Möhren, Paprika</p>
+									<p class="en" lang="en">Fried noodles with prawns, soybeans, broccoli, cauliflower, mangetout, carrots, corn</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">22</span>Gebratener Reis mit Garnelen</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 3, 7</small>14,00 €</span>
+									</div>
+									<p class="translit">Bazun Htamin: Gjo</p>
+									<p>Shrimps, Brokkoli, Blumenkohl, Kaiserschoten, Möhren, Paprika, Mais</p>
+									<p class="en" lang="en">Fried rice with prawns, broccoli, cauliflower, mangetout, carrots, bell pepper, corn</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">23</span>Gebratene Nudeln mit Garnelen</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 3, 4, 7</small>14,00 €</span>
+									</div>
+									<p class="translit">Bazun Khau’ Hswe: Gjo</p>
+									<p>Shrimps, Sojabohnen, Brokkoli, Blumenkohl, Kaiserschoten, Möhren und Paprika</p>
+									<p class="en" lang="en">Fried noodles with prawns, soybeans, broccoli, cauliflower, mangetout, carrots, corn</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">24</span>Gebratene Reisnudeln mit Hähnchen, Garnelen</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 3, 4, 7</small>14,00 €</span>
+									</div>
+									<p class="translit">Kja Zan Gjo</p>
+									<p>Shrimps, Brokkoli, Blumenkohl, Kaiserschoten, Möhren, Paprika und Mais</p>
+									<p class="en" lang="en">Fried rice noodles with chicken, prawns, broccoli, cauliflower, mangetout, carrots, bell pepper, corn</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">25</span>Nasi Goreng</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 3, 7</small>14,00 €</span>
+									</div>
+									<p>Gebratener Reis mit Hähnchen, Garnelen, Brokkoli, Blumenkohl, Kaiserschoten, Möhren, Paprika, verfeinert mit Curry, bestreut mit Mandeln</p>
+									<p class="en" lang="en">Fried rice with chicken, prawns, broccoli, cauliflower, mangetout, carrots, bell pepper, corn, flavoured with curry, sprinkled with almonds, krupuk</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">26</span>Bami Goreng</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 3, 4, 7</small>14,00 €</span>
+									</div>
+									<p>Gebratene Nudeln mit Hähnchen, Garnelen, Sojabohnen, Brokkoli, Kaiserschoten, Möhren, Paprika, verfeinert mit Curry, bestreut mit Mandeln</p>
+									<p class="en" lang="en">Fried noodles with chicken, prawns, soybeans, broccoli, cauliflower, mangetout, carrots, bell pepper, corn, flavoured with curry, sprinkled with almonds, krupuk</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">27</span>Gebratener Reis mit Hähnchenfilet</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 7</small>13,50 €</span>
+									</div>
+									<p class="translit">Kje’ Tha: Htamin: Gjo</p>
+									<p>Brokkoli, Blumenkohl, Kaiserschoten, Möhren, Paprika</p>
+									<p class="en" lang="en">Fried rice with breast of chicken, broccoli, cauliflower, mangetout, carrots, bell pepper and corn</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">28</span>Gebratene Nudeln mit Hähnchenfilet</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 4, 7</small>13,50 €</span>
+									</div>
+									<p class="translit">Kje’ Tha: Khau’ Hswe: Gjo</p>
+									<p>Sojabohnen, Brokkoli, Blumenkohl, Kaiserschoten, Möhren und Paprika</p>
+									<p class="en" lang="en">Fried noodles with breast of chicken, soybeans, broccoli, cauliflower, mangetout, carrots, bell pepper and corn</p>
+								</div>
+							</div>
+						</div>
+						<div class="menu-group" data-group="meeresfruechte">
+							<h4>Meeresfrüchte &amp; Fisch</h4>
+							<div class="dishes">
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">30</span>Gebackener Fisch in süß-saurer Soße</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 9</small>14,00 €</span>
+									</div>
+									<p class="translit">Nga Chou Chin Gjo</p>
+									<p>Mit Gurken, Bambussprossen, Paprika, Möhren, Zucchini, Ananas</p>
+									<p class="en" lang="en">Fried fish in sweet-and-sour sauce with cucumber, bamboo shoots, bell pepper, carrots, courgette, pineapple</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">31</span>Gebackener Fisch mit verschiedenem Gemüse</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4, 9</small>14,00 €</span>
+									</div>
+									<p class="translit">Mandalay Nga Hin</p>
+									<p>Mit Sojabohnen, Bambussprossen, Paprika, Porree, Chinakohl, Pak Choi, Brokkoli</p>
+									<p class="en" lang="en">Fried fish with soybeans, bamboo shoots, bell pepper, leek, Chinese cabbage, pak choi, broccoli</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">32</span>Gebackener Fisch in Currysoße à la maison</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4, 9</small>14,00 €</span>
+									</div>
+									<p class="translit">Nga Oun: Nou. Che’</p>
+									<p>Mit Zucchini, Brokkoli, Blumenkohl, Kaiserschoten, Möhren</p>
+									<p class="en" lang="en">Fried fish in curry sauce home style, with courgette, broccoli, cauliflower, mangetout, carrots</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">33</span>Scampi-Tempura mit verschiedenem Gemüse</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 3, 9</small>20,00 €</span>
+									</div>
+									<p class="translit">Bazun Dou’ Gjo</p>
+									<p>Mit Sojabohnen, Bambussprossen, Paprika, Porree, Chinakohl, Pak Choi, Brokkoli</p>
+									<p class="en" lang="en">Scampi tempura with soybeans, bamboo shoots, bell pepper, leek, Chinese cabbage, pak choi, broccoli</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">34</span>Gebackene Scampi in süß-saurer Soße</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>3, 9</small>20,00 €</span>
+									</div>
+									<p class="translit">Bazun Dou’ Chou Chin Gjo</p>
+									<p>Mit Gurken, Bambussprossen, Paprika, Möhren, Zucchini, Ananas</p>
+									<p class="en" lang="en">Fried scampi in sweet-and-sour sauce with cucumber, bamboo shoots, bell pepper, carrots, courgette, pineapple</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">35</span>Scampi in süß-saurer Soße</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>3</small>20,00 €</span>
+									</div>
+									<p class="translit">Bazun Dou’ Chou Chin</p>
+									<p>Mit Gurken, Bambussprossen, Paprika, Möhren, Zucchini, Ananas</p>
+									<p class="en" lang="en">Scampi in sweet-and-sour sauce with cucumber, bamboo shoots, bell pepper, carrots, courgette, pineapple</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">36</span>Scampi Mandalay Spezial</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 3, 4, 7</small>20,00 €</span>
+									</div>
+									<p class="translit">Mandalay Bazun Dou’ Hin</p>
+									<p>Mit Sojabohnen, Bambussprossen, Paprika, Porree, Chinakohl, Pak Choi, Brokkoli</p>
+									<p class="en" lang="en">Scampi Mandalay special with soybeans, bamboo shoots, bell pepper, leek, Chinese cabbage, pak choi, broccoli</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">37</span>Scampi in Currysoße nach Art des Hauses</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 3, 4</small>20,00 €</span>
+									</div>
+									<p class="translit">Bazun Dou’ Oun: Nou. Che’</p>
+									<p>Mit Zucchini, Brokkoli, Blumenkohl, Kaiserschoten, Möhren</p>
+									<p class="en" lang="en">Scampi in curry sauce home style with courgette, broccoli, cauliflower, mangetout, carrots</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">38</span>Tintenfisch Mandalay Spezial</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4, 7, 8</small>14,00 €</span>
+									</div>
+									<p class="translit">Pji Gji Nga Koun: Baung</p>
+									<p>Mit Sojasoße, Tomaten, Brokkoli, Blumenkohl, Möhren, Porree, Pak Choi</p>
+									<p class="en" lang="en">Calamari Mandalay special with soy sauce, tomatoes, broccoli, cauliflower, carrots, leek, pak choi</p>
+								</div>
+							</div>
+						</div>
+						<div class="menu-group" data-group="haehnchen">
+							<h4>Hähnchen</h4>
+							<div class="dishes">
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">40</span>Mandalay Spezial Hähnchenfilet<span class="tag h">scharf</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7</small>14,00 €</span>
+									</div>
+									<p>Mit Brokkoli, Paprika, Möhren, Porree, Kaiserschoten, Pak Choi, Sojabohnen, Bambussprossen, Kräutern</p>
+									<p class="en" lang="en">Mandalay special chicken breast with broccoli, bell pepper, carrots, leek, mangetout, pak choi, soybeans, bamboo shoots, herbs</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">41</span>Hähnchenfilet in Currysoße nach Art des Hauses</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4</small>14,00 €</span>
+									</div>
+									<p class="translit">Kje’ Tha: Hin</p>
+									<p class="en" lang="en">Chicken breast in curry sauce home style</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">42</span>Hähnchenfilet mit Tongku-Pilzen</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7</small>14,00 €</span>
+									</div>
+									<p class="translit">Kje’ Tha: Hmou Gjau Hin</p>
+									<p>In Sojasoße, Shiitake</p>
+									<p class="en" lang="en">Chicken breast with shiitake mushrooms in soy sauce</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">43</span>Hähnchenfilet mit frischen Champignons</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4</small>14,00 €</span>
+									</div>
+									<p class="translit">Kje’ Tha: Hmou Hin</p>
+									<p>In Kokosnussmilch</p>
+									<p class="en" lang="en">Chicken breast with fresh mushrooms in coconut milk</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">44</span>Hähnchenfilet mit Tomaten</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4</small>14,00 €</span>
+									</div>
+									<p class="translit">Kje’ Tha: Khajan: Gjin Dhi: Hin</p>
+									<p class="en" lang="en">Chicken breast with tomatoes</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">45</span>Hähnchenfilet mit frischen Paprikaschoten</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>2, 4, 9</small>14,00 €</span>
+									</div>
+									<p class="translit">Kje’ Tha: Ngajou’ Dhi: Hin</p>
+									<p class="en" lang="en">Chicken breast with fresh bell pepper</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">46</span>Gebackene Hähnchenbrust mit Ananas und Morcheln</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>9</small>14,50 €</span>
+									</div>
+									<p class="translit">Kje’ Tha: Chou Chin Gjo</p>
+									<p>In süß-saurer Soße</p>
+									<p class="en" lang="en">Fried chicken breast with pineapple and morels in sweet-and-sour sauce</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">47</span>Gebackene Hähnchenbrust<span class="tag h">pikant</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>7, 9</small>14,50 €</span>
+									</div>
+									<p>Würzig-pikant, auf Paprika, Porree, Karotten, Sojabohnen, Kaiserschoten, Chinakohl, Champignons</p>
+									<p class="en" lang="en">Aromatic spicy fried chicken breast on bell pepper, leek, carrots, soybeans, mangetout, Chinese cabbage, mushrooms</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">48</span>Gebackene Hähnchenbrust in Erdnusssoße</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>6, 9</small>14,50 €</span>
+									</div>
+									<p>Auf Paprika, Porree, Karotten, Sojabohnen, Kaiserschoten, Chinakohl, Champignons</p>
+									<p class="en" lang="en">Fried chicken breast in peanut sauce on bell pepper, leek, carrots, soybeans, mangetout, Chinese cabbage, mushrooms</p>
+								</div>
+							</div>
+						</div>
+						<div class="menu-group" data-group="ente">
+							<h4>Ente</h4>
+							<div class="dishes">
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">50</span>Entenbrust mit Tongku-Pilzen</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7, 9</small>16,50 €</span>
+									</div>
+									<p>Mit Porree, Möhren, Sojasoße</p>
+									<p class="en" lang="en">Duck breast with shiitake mushrooms, leek, carrots, soy sauce</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">51</span>Entenbrust mit Morcheln</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7, 9</small>16,50 €</span>
+									</div>
+									<p>Porree, Sojasoße</p>
+									<p class="en" lang="en">Duck breast with morels, leek, soy sauce</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">52</span>Entenbrust mit Ananas in süß-saurer Soße</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>9</small>16,50 €</span>
+									</div>
+									<p>Mit Ananas, Gurken, Paprika, Chinakohl</p>
+									<p class="en" lang="en">Duck breast in sweet-and-sour sauce with pineapple, cucumber, Chinese cabbage</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">53</span>Entenbrust mit frischen Champignons und Mandeln</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 6</small>16,50 €</span>
+									</div>
+									<p>Tomaten, mit Estragon in Kokosnussmilch</p>
+									<p class="en" lang="en">Duck breast with fresh mushrooms and almonds, tomatoes, tarragon in coconut milk</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">54</span>Gebackene Entenbrust mit Gemüse und Erdnusssoße</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>6, 9</small>16,50 €</span>
+									</div>
+									<p>Brokkoli, Sojabohnen, Pak Choi, Paprika, Zuckerschoten</p>
+									<p class="en" lang="en">Fried duck breast with vegetables and peanut sauce, broccoli, soybeans, pak choi, bell pepper, mangetout</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">55</span>Pikante Ente mit Gemüse</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7</small>16,50 €</span>
+									</div>
+									<p>Nach Art des Hauses, mit Brokkoli, Sojabohnen, Pak Choi, Paprika, Kaiserschoten</p>
+									<p class="en" lang="en">Spicy duck with broccoli, soybeans, pak choi, bell pepper, sugar snaps and rice à la maison</p>
+								</div>
+							</div>
+						</div>
+						<div class="menu-group" data-group="rind">
+							<h4>Rind</h4>
+							<div class="dishes">
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">60</span>Rindfleisch Mandalay Spezial</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7</small>15,50 €</span>
+									</div>
+									<p class="translit">Ame: Dha</p>
+									<p>Mariniertes Rindfleisch mit Sojabohnen, Paprika, Möhren, Pak Choi</p>
+									<p class="en" lang="en">Marinated beef with soybeans, bell pepper, carrots, pak choi</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">61</span>Rindfleisch nach Art des Hauses</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7</small>15,50 €</span>
+									</div>
+									<p class="translit">Ame: Dha Oun: Nou. Che</p>
+									<p>Gekochtes Rindfleisch mit Curry, Zucchini, Blumenkohl, Brokkoli, Zuckerschoten, Möhren, Paprika</p>
+									<p class="en" lang="en">Cooked beef home style, with curry, courgette, broccoli, cauliflower, mangetout, carrots, bell pepper</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">62</span>Bulgogi</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7</small>20,00 €</span>
+									</div>
+									<p>Mariniertes Rindfleisch mit frischen Champignons, am Tisch zubereitet</p>
+									<p class="en" lang="en">Marinated beef with fresh mushrooms, prepared directly at the table</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">63</span>Rindfleisch mit Champignons</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4</small>15,50 €</span>
+									</div>
+									<p class="translit">Ame: Dha Hmou Hinn</p>
+									<p>Gekochtes Rindfleisch mit Champignons, Möhren, in Estragon, Kokosnussmilch</p>
+									<p class="en" lang="en">Cooked beef with mushrooms, carrots, in tarragon, coconut milk</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">64</span>Rindfleisch mit Tongku-Pilzen</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7</small>15,50 €</span>
+									</div>
+									<p class="translit">Ame: Dha Hmou (Shiitake)</p>
+									<p>Mariniertes Rindfleisch mit Tongku-Pilzen, Porree, Sojasoße</p>
+									<p class="en" lang="en">Marinated beef with shiitake mushrooms, leek, soy sauce</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">65</span>Rindfleisch mit Morcheln</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7</small>15,50 €</span>
+									</div>
+									<p class="translit">Ame: Dha Hmou Hsi Bjan Gjo</p>
+									<p>Mariniertes Rindfleisch mit Morcheln, Porree, Sojasoße</p>
+									<p class="en" lang="en">Marinated beef with morels, leek, soy sauce</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">66</span>Rindfleisch mit Paprikaschoten</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4</small>15,50 €</span>
+									</div>
+									<p>Gekochtes Rindfleisch mit Paprikaschoten, Kaiserschoten, Möhren</p>
+									<p class="en" lang="en">Cooked beef with bell pepper, mangetout, carrots</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">67</span>Rindfleisch mit Zwiebeln</span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>4, 7</small>15,50 €</span>
+									</div>
+									<p>Mariniertes Rindfleisch mit Zwiebeln, Porree, Möhren</p>
+									<p class="en" lang="en">Marinated beef with onions, leek, carrots</p>
+								</div>
+							</div>
+						</div>
+						<div class="menu-group" data-group="vegetarisch">
+							<h4>Vegetarisch</h4>
+							<div class="dishes">
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">70</span>Gemüseplatte süß-sauer<span class="tag v">vegan</span></span>
+										<span class="price">13,50 €</span>
+									</div>
+									<p>Mit Ananas, Möhren, Paprika, Gurken, Chinakohl, Zucchini, gebackenem Tofu</p>
+									<p class="en" lang="en">Vegetable platter sweet-and-sour with pineapple, carrots, bell pepper, cucumber, Chinese cabbage, courgette, fried tofu</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">71</span>Gemüseplatte Mandalay Spezial<span class="tag v">vegan</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>7</small>13,50 €</span>
+									</div>
+									<p>Mit Sojabohnen, Chinakohl, Pak Choi, Paprika, Möhren, Kaiserschoten, Basilikum, gebackenem Tofu</p>
+									<p class="en" lang="en">Vegetable platter Mandalay special with soybeans, Chinese cabbage, pak choi, bell pepper, carrots, mangetout, basil, fried tofu</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">72</span>Curry-Gemüse<span class="tag v">vegan</span></span>
+										<span class="price">13,50 €</span>
+									</div>
+									<p>Mit Paprika, Brokkoli, Möhren, Zucchini, Blumenkohl, gebackenem Tofu</p>
+									<p class="en" lang="en">Vegetable curry with bell pepper, broccoli, carrots, courgette, cauliflower, fried tofu</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">73</span>Gebratenes Gemüse mit Erdnusssoße<span class="tag v">vegan</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>6</small>13,50 €</span>
+									</div>
+									<p>Mit Sojabohnen, Porree, Chinakohl, Pak Choi, Paprika, Estragon, gebackenem Tofu, in Kokosnussmilch</p>
+									<p class="en" lang="en">Fried vegetables with peanut sauce, with soybeans, leek, Chinese cabbage, pak choi, bell pepper, tarragon, fried tofu in coconut milk</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">74</span>Gemüse in Tomatensoße geschmort<span class="tag v">vegan</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>7</small>13,50 €</span>
+									</div>
+									<p>Mit Sojabohnen, Porree, Chinakohl, Pak Choi, Tomaten, Oregano, gebackenem Tofu</p>
+									<p class="en" lang="en">Vegetables stewed in tomato sauce with soybeans, leek, Chinese cabbage, pak choi, tomatoes, oregano, fried tofu</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">75</span>Tempura-Gemüse<span class="tag v">vegan</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>9</small>14,50 €</span>
+									</div>
+									<p>Verschiedene Gemüsesorten in süß-saurer Tamarinden-Soße</p>
+									<p class="en" lang="en">Various vegetables in sweet-and-sour tamarind sauce</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">76</span>Große Nudelsuppe mit verschiedenem Gemüse<span class="tag v">vegan</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>7</small>13,50 €</span>
+									</div>
+									<p>Mit gebackenem Tofu, Paprika, Möhren, Chinakohl, Pak Choi und Brokkoli</p>
+									<p class="en" lang="en">Large noodle soup with various vegetables, fried tofu, bell pepper, carrots, Chinese cabbage, pak choi and broccoli</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">77</span>Gebratener Reis<span class="tag v">auf Wunsch vegan</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 7</small>13,50 €</span>
+									</div>
+									<p>Mit Brokkoli, Blumenkohl, Kaiserschoten, Möhren, Paprika und Mais</p>
+									<p class="en" lang="en">Fried rice with broccoli, cauliflower, mangetout, carrots, bell pepper and corn</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">78</span>Gebratene Nudeln<span class="tag v">auf Wunsch vegan</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 7</small>13,50 €</span>
+									</div>
+									<p>Mit Sojabohnen, Brokkoli, Blumenkohl, Kaiserschoten, Möhren, Paprika</p>
+									<p class="en" lang="en">Fried noodles with soybeans, broccoli, cauliflower, mangetout, carrots, bell pepper</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">79</span>Nasi Goreng<span class="tag v">auf Wunsch vegan</span><span class="tag h">scharf</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 7</small>13,50 €</span>
+									</div>
+									<p>Mit Brokkoli, Blumenkohl, Kaiserschoten, Möhren, Paprika, Mais, verfeinert mit Curry</p>
+									<p class="en" lang="en">Fried rice with broccoli, cauliflower, mangetout, carrots, bell pepper, corn, refined with curry</p>
+								</div>
+								<div class="dish">
+									<div class="top">
+										<span class="name"><span class="no">80</span>Bami Goreng<span class="tag v">auf Wunsch vegan</span><span class="tag h">scharf</span></span>
+										<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 7</small>13,50 €</span>
+									</div>
+									<p>Mit Sojabohnen, Brokkoli, Blumenkohl, Kaiserschoten, Möhren, Paprika, verfeinert mit Curry</p>
+									<p class="en" lang="en">Fried noodles with soybeans, broccoli, cauliflower, mangetout, carrots, bell pepper, refined with curry</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-panel" id="panel-menues" role="tabpanel" aria-labelledby="tab-menues">
+						<h3>Menüs</h3>
+						<h4>Für 1 Person</h4>
+						<div class="dishes">
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">A1</span>Ente Reistisch</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 3, 4, 7</small>25,00 €</span>
+								</div>
+								<p>Peking-Suppe, Krupuk, Ente (pikant)</p>
+								<p class="en" lang="en">Peking soup, krupuk, duck (spicy)</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">A2</span>Bulgogi Reistisch</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 3, 4, 7</small>26,00 €</span>
+								</div>
+								<p>Peking-Suppe und mariniertes Rindfleisch (am Tisch zubereitet)</p>
+								<p class="en" lang="en">Peking soup with marinated beef (prepared at the table)</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">A3</span>Bazun Dou’ Gjo Tempura Reistisch</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>3, 4, 9</small>29,00 €</span>
+								</div>
+								<p>Won-Ton-Suppe, Krupuk, gebackene Scampi, gebackenes frisches Gemüse</p>
+								<p class="en" lang="en">Wonton soup, krupuk, baked scampi, baked fresh vegetables</p>
+							</div>
+						</div>
+						<h4>Für 2 Personen</h4>
+						<div class="dishes">
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">B1</span>Mandalay Athar Son Hin (Tschin Kwa Fuk)</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>3, 4, 7</small>50,00 €</span>
+								</div>
+								<p>Peking-Suppe, verschiedenes frisches Gemüse, Scampi, Rindfleisch und Geflügel</p>
+								<p class="en" lang="en">Peking soup, different fresh vegetables, scampi, beef and poultry</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">B2</span>Mandalay Athar Son Hin Cho (Feuertopf)</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>3, 4, 7</small>50,00 €</span>
+								</div>
+								<p>Frühlingsrolle, Krupuk, verschiedenes frisches Gemüse, Scampi, Rindfleisch, Geflügel in pikanter Bouillon-Soße</p>
+								<p class="en" lang="en">Spring rolls, krupuk, different fresh vegetables, scampi, beef and poultry</p>
+							</div>
+						</div>
+						<h4>Für 3 Personen</h4>
+						<div class="dishes">
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">C</span>Mandalay Spezial</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 4, 7</small>75,00 €</span>
+								</div>
+								<p>Peking-Suppe, Krupuk, Ente pikant, Rind Mandalay Spezial, gebackene Hähnchenbrust in Erdnuss-Soße</p>
+								<p class="en" lang="en">Peking soup, spicy duck, beef Mandalay special, baked chicken breast in peanut sauce</p>
+							</div>
+						</div>
+						<h4>Für 4 Personen</h4>
+						<div class="dishes">
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">D</span>Mandalay Spezial</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>1, 2, 3, 4, 7</small>95,00 €</span>
+								</div>
+								<p>Frühlingsrolle oder Suppe Ihrer Wahl, Krupuk, Scampi Mandalay Spezial, gebackene Hähnchenbrust in süß-saurer Soße, Rindfleisch Mandalay Spezial, Ente pikant</p>
+								<p class="en" lang="en">Scampi Mandalay special, baked chicken breast in sweet-and-sour sauce, beef Mandalay special, spicy duck</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-panel" id="panel-desserts" role="tabpanel" aria-labelledby="tab-desserts">
+						<h3>Desserts</h3>
+						<div class="dishes">
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">81</span>Gebackene Ananas mit Honig</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>9</small>4,00 €</span>
+								</div>
+								<p class="en" lang="en">Fried pineapple with honey</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">82</span>Gebackene Banane mit Honig</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>9</small>4,00 €</span>
+								</div>
+								<p class="en" lang="en">Fried banana with honey</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">83</span>Gebackener Apfel mit Honig</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>9</small>4,00 €</span>
+								</div>
+								<p class="en" lang="en">Fried apple with honey</p>
+							</div>
+							<div class="dish">
+								<div class="top">
+									<span class="name"><span class="no">84</span>Dessert nach Art des Hauses</span>
+									<span class="price"><small class="allergens"><span class="sr-only">Allergene: </span>9, 11</small>7,00 €</span>
+								</div>
+								<p>Pfannkuchen, Eis, selbstgemachte Orangensoße, Orangenlikör und Sahne</p>
+								<p class="en" lang="en">Pancake, ice cream, homemade orange sauce, orange liqueur with whipped cream</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="legend">
+						<p><strong>Allergene</strong></p>
+						<ul class="allergen-key">
+							<li>1 = Eier</li>
+							<li>2 = Fisch</li>
+							<li>3 = Krebstiere</li>
+							<li>4 = Sellerie</li>
+							<li>5 = Sesamsamen</li>
+							<li>6 = Erdnüsse</li>
+							<li>7 = Sojabohnen</li>
+							<li>8 = Weichtiere</li>
+							<li>9 = Gluten</li>
+							<li>10 = Sulfite</li>
+							<li>11 = Milch</li>
+						</ul>
+						
+					</div>
 				</div>
 			</section>
 
@@ -320,47 +1098,85 @@
 				<div class="wrap visit">
 					<div>
 						<h2>Kommen Sie vorbei</h2>
-						<address>
-							Mandalay Restaurant<br />
-							Brüsseler Str. 53<br />
-							50674 Köln
-						</address>
-						<table class="hours">
-							<tr>
-								<td>Montag</td>
-								<td>Ruhetag</td>
-							</tr>
-							<tr>
-								<td>Dienstag – Freitag</td>
-								<td>12:00 – 14:30, 17:30 – 22:00</td>
-							</tr>
-							<tr>
-								<td>Samstag</td>
-								<td>12:00 – 22:00</td>
-							</tr>
-							<tr>
-								<td>Sonntag</td>
-								<td>12:00 – 21:00</td>
-							</tr>
-						</table>
-						<div class="box">
-							<h3>Tisch reservieren</h3>
-							<p>
-								Rufen Sie uns an oder schreiben Sie uns.
-								Für Gruppen ab sechs Personen empfehlen
-								wir, einige Tage vorher zu reservieren.
-							</p>
-							<div class="btns">
-								<a
-									class="btn primary"
-									href="tel:+492215101296"
-									>0221 510 12 96</a
-								>
-								<a
-									class="btn ghost"
-									href="mailto:aungthu@t-online.de"
-									>E-Mail schreiben</a
-								>
+						<!-- Map: a static Google Maps screenshot on our own server, so
+						     no visitor data goes anywhere. Only a click opens Google
+						     Maps in a new tab. -->
+						<figure class="map">
+							<a
+								class="map-open"
+								href="https://www.google.com/maps/search/?api=1&amp;query=Mandalay+Restaurant+Br%C3%BCsseler+Str.+53+50674+K%C3%B6ln"
+								target="_blank"
+								rel="noopener"
+							>
+								<img
+									src="assets/images/karte-mandalay.jpg"
+									alt="Kartenausschnitt: Mandalay Restaurant in der Brüsseler Straße 53, zwischen Brüsseler Platz und Lütticher Straße, Köln"
+									width="1600"
+									height="900"
+									loading="lazy"
+								/>
+								<span class="sr-only">In Google Maps öffnen (neues Fenster)</span>
+							</a>
+							<a
+								class="map-gmaps"
+								href="https://www.google.com/maps/search/?api=1&amp;query=Mandalay+Restaurant+Br%C3%BCsseler+Str.+53+50674+K%C3%B6ln"
+								target="_blank"
+								rel="noopener"
+								>In Google Maps öffnen</a
+							>
+							<figcaption class="map-credit">
+								Kartendaten © 2026 Google
+							</figcaption>
+						</figure>
+
+						<div class="visit-info">
+							<div>
+								<table class="hours">
+									<tr>
+										<td>Montag</td>
+										<td>Ruhetag</td>
+									</tr>
+									<tr>
+										<td>Dienstag – Freitag</td>
+										<td>12:00 – 14:30, 17:30 – 22:00</td>
+									</tr>
+									<tr>
+										<td>Samstag</td>
+										<td>12:00 – 22:00</td>
+									</tr>
+									<tr>
+										<td>Sonntag</td>
+										<td>12:00 – 21:00</td>
+									</tr>
+								</table>
+								<p class="hours-address">
+									<span class="label">Adresse</span>
+									Brüsseler Str. 53, 50674 Köln
+								</p>
+							</div>
+							<div class="box">
+								<h3>Tisch reservieren</h3>
+								<p>
+									Reservieren Sie online oder rufen Sie uns an.
+									Für Gruppen ab sechs Personen empfehlen
+									wir, einige Tage vorher zu reservieren.
+								</p>
+								<div class="btns">
+									<a
+										class="btn primary"
+										href="tel:+492215101296"
+										>0221 510 12 96</a
+									>
+									<!-- Plain link to OpenTable (no OpenTable script on our page,
+									     so no visitor data goes there before a click) -->
+									<a
+										class="btn ghost ext"
+										href="https://www.opentable.de/restref/client/?rid=516183&amp;restref=516183&amp;lang=de-DE"
+										target="_blank"
+										rel="noopener"
+										>Online reservieren</a
+									>
+								</div>
 							</div>
 						</div>
 					</div>

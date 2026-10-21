@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <filter id="wax" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="5" xChannelSelector="R" yChannelSelector="G" result="wobbly"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="17" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 2.5" result="mask"/>
+      <feComposite in="wobbly" in2="mask" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#3B2416" stroke-opacity=".18" stroke-width="2.6"/>
+    </pattern>
+  </defs>
+
+  <g filter="url(#wax)" stroke-linecap="round" stroke-linejoin="round">
+    <!-- shadow -->
+    <ellipse cx="208" cy="256" rx="170" ry="18" fill="#3B2416" opacity=".18"/>
+
+    <!-- plate -->
+    <ellipse cx="200" cy="200" rx="180" ry="62" fill="#F4ECDC" stroke="#4A3426" stroke-width="4"/>
+    <ellipse cx="200" cy="200" rx="180" ry="62" fill="url(#hatch)" opacity=".6"/>
+
+    <!-- chili dip -->
+    <ellipse cx="318" cy="184" rx="48" ry="20" fill="#EFE5D2" stroke="#4A3426" stroke-width="3.5"/>
+    <ellipse cx="318" cy="182" rx="38" ry="13" fill="#C0392B"/>
+    <g fill="#F4A261"><circle cx="306" cy="180" r="2.5"/><circle cx="326" cy="184" r="2.5"/><circle cx="318" cy="178" r="2"/></g>
+
+    <!-- samosas -->
+    <g stroke="#4A3426" stroke-width="4">
+      <path d="M70 214 Q72 204 82 198 L170 108 Q180 100 186 112 L210 214 Q212 224 200 226 L84 230 Q70 228 70 214z" fill="#E2A447"/>
+      <path d="M150 226 Q150 214 160 208 L236 120 Q246 110 254 122 L286 220 Q288 232 276 234 L164 238 Q150 238 150 226z" fill="#E9B257"/>
+    </g>
+    <g stroke="none">
+      <path d="M70 214 Q72 204 82 198 L170 108 Q180 100 186 112 L210 214 Q212 224 200 226 L84 230 Q70 228 70 214z" fill="url(#hatch)"/>
+      <path d="M150 226 Q150 214 160 208 L236 120 Q246 110 254 122 L286 220 Q288 232 276 234 L164 238 Q150 238 150 226z" fill="url(#hatch)"/>
+    </g>
+    <!-- crimped edges + blisters -->
+    <g fill="none" stroke="#B87425" stroke-width="3">
+      <path d="M178 116 l8 6 m-2 14 l8 6 m-4 16 l8 6 m-4 16 l8 6"/>
+      <path d="M246 128 l8 6 m-2 16 l8 6 m-2 16 l8 6 m-2 16 l8 6"/>
+    </g>
+    <g fill="#C98A3A">
+      <circle cx="120" cy="196" r="3"/><circle cx="140" cy="176" r="3"/><circle cx="156" cy="206" r="3"/>
+      <circle cx="210" cy="200" r="3"/><circle cx="230" cy="176" r="3"/><circle cx="196" cy="222" r="3"/>
+    </g>
+
+    <!-- mint leaves -->
+    <g fill="#4E9A4B" stroke="#2F6B34" stroke-width="2">
+      <path d="M58 168 q18 -22 36 -6 q-16 16 -36 6z"/>
+      <path d="M92 152 q14 -20 32 -8 q-14 16 -32 8z"/>
+    </g>
+  </g>
+</svg>

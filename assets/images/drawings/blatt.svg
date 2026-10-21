@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <filter id="wax" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="23" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="4" xChannelSelector="R" yChannelSelector="G" result="wobbly"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="2" seed="24" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 2.5" result="mask"/>
+      <feComposite in="wobbly" in2="mask" operator="in"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#wax)" stroke-linecap="round" stroke-linejoin="round">
+    <!-- big leaf -->
+    <path d="M34 168 Q20 70 120 30 Q176 10 178 22 Q186 40 160 96 Q120 172 34 168z" fill="#4E9A4B" stroke="#2F5E2E" stroke-width="6"/>
+    <!-- veins -->
+    <g fill="none" stroke="#B9D98A" stroke-width="5">
+      <path d="M40 162 Q100 100 170 28"/>
+      <path d="M80 118 l-12 -30 M104 92 l-8 -32 M128 66 l-4 -26"/>
+      <path d="M80 118 l32 6 M104 92 l34 4 M128 66 l30 2"/>
+    </g>
+    <!-- small sprig -->
+    <path d="M150 176 q10 -24 30 -30" fill="none" stroke="#2F5E2E" stroke-width="5"/>
+    <path d="M168 154 q14 -16 26 -6 q-12 14 -26 6z" fill="#7DBB5A" stroke="#2F5E2E" stroke-width="4"/>
+  </g>
+</svg>
