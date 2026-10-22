@@ -109,6 +109,257 @@
   });
 })();
 
+// "Back to top" bowl. Desktop/tablet: while the hero scrolls away, the Mohinga
+// bowl glides from the hero into the bottom right corner, shrinks and flips
+// into the top view halfway. Phones and legal pages (no bowl in the hero) and reduced
+// motion: the top view fades in. Styles: "Back to top" bowl in styles.css.
+(function () {
+  var art = document.querySelector('.hero-art');
+  var hero = document.querySelector('.hero');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  // Relative to this script, so it also works from pages in subfolders
+  var base = new URL('../assets/images/drawings/', document.currentScript.src).href;
+
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'bowl-top';
+  btn.setAttribute('aria-label', 'Zurück nach oben');
+  // Up arrow above the bowl: a light outline drawn under the dark arrow
+  var arrow = 'M12 19V5M6 11l6-6 6 6';
+  // .bowl-top-art: hover wobble; .bowl-top-scale: shrinks during the flight
+  btn.innerHTML =
+    '<span class="bowl-top-art"><span class="bowl-top-scale">' +
+    '<img class="side" src="' + base + 'mohinga.svg" alt="">' +
+    '<img class="top" src="' + base + 'mohinga-top.svg" alt="">' +
+    '</span></span>' +
+    '<svg class="bowl-top-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+    '<path class="halo" d="' + arrow + '"/><path class="line" d="' + arrow + '"/>' +
+    '</svg>';
+  document.body.appendChild(btn);
+
+  var CORNER = 84;   // size in the corner (px)
+  var MARGIN = 20;   // distance from the screen edges (px)
+  var scaler = btn.querySelector('.bowl-top-scale');
+  var mode, start, range;
+  var lastT = null;  // flight progress at the last update (for the scroll direction)
+  var ticking = false;
+
+  function clamp(v) { return Math.min(1, Math.max(0, v)); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+  function setActive(on) {
+    btn.classList.toggle('is-active', on);
+    // Not reachable by keyboard / screen readers while it's only decoration
+    btn.tabIndex = on ? 0 : -1;
+    if (on) btn.removeAttribute('aria-hidden');
+    else btn.setAttribute('aria-hidden', 'true');
+  }
+
+  function measure() {
+    var visible = art && getComputedStyle(art).display !== 'none';
+    mode = visible && !reduce.matches ? 'fly' : 'fade';
+    document.documentElement.classList.toggle('bowl-fly', mode === 'fly');
+    btn.classList.toggle('is-fade', mode === 'fade');
+    if (mode === 'fly') {
+      var r = art.getBoundingClientRect();
+      start = { x: r.left, y: r.top + window.scrollY, w: r.width };
+      // The flight is done when most of the hero has scrolled away
+      range = Math.max(200, hero.offsetHeight * .8);
+      // The button keeps its corner size; only the drawing inside is drawn at
+      // the hero size and shrunk with a transform (no redraw of the crayon
+      // filter on every frame)
+      btn.style.width = btn.style.height = CORNER + 'px';
+      scaler.style.width = scaler.style.height = start.w + 'px';
+    } else {
+      btn.style.width = btn.style.height = btn.style.transform = btn.style.position = '';
+      scaler.style.width = scaler.style.height = scaler.style.transform = '';
+      btn.classList.add('is-top');
+    }
+  }
+
+  function update() {
+    ticking = false;
+    var y = window.scrollY;
+    if (mode === 'fade') return setActive(y > 400);
+
+    var t = clamp(y / range);
+    var e = ease(t);
+    var vw = document.documentElement.clientWidth;
+    var vh = window.innerHeight;
+    var x = lerp(start.x, vw - MARGIN - CORNER, e);
+    var cornerY = vh - MARGIN - CORNER;
+    var top;
+    if (t < 1) {
+      // In flight: part of the page, so it scrolls along natively with the
+      // hero (no lag at the start); the script only adds the way to the corner
+      btn.style.position = 'absolute';
+      top = lerp(start.y, y + cornerY, e);
+    } else {
+      // Arrived: pinned to the corner of the screen
+      btn.style.position = 'fixed';
+      top = cornerY;
+    }
+    btn.style.transform = 'translate(' + x.toFixed(1) + 'px,' + top.toFixed(1) + 'px)';
+    scaler.style.transform = 'scale(' + (lerp(start.w, CORNER, e) / start.w).toFixed(4) + ')';
+    // Flip into the top view halfway on the way down; on the way up, flip
+    // back earlier, so the flip is done before the bowl is back in the hero.
+    // The flip itself is a short timed animation (CSS), so it never gets
+    // stuck half done when scrolling stops.
+    var down = lastT === null || t >= lastT;
+    if (down && t > .5) btn.classList.add('is-top');
+    else if (!down && t < .6) btn.classList.remove('is-top');
+    else if (t < .5) btn.classList.remove('is-top');   // e.g. after a resize
+    lastT = t;
+    setActive(t > .95);
+  }
+
+  function refresh() { measure(); update(); }
+
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduce.matches ? 'auto' : 'smooth' });
+    // Keyboard users continue at the top of the page
+    var logo = document.querySelector('.logo');
+    if (logo) logo.focus({ preventScroll: true });
+  });
+
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }, { passive: true });
+  window.addEventListener('resize', refresh);
+  reduce.addEventListener('change', refresh);
+  // The drawing's size is only known once it has loaded
+  if (art && !art.complete) art.addEventListener('load', refresh);
+  refresh();
+})();
+
+// "Neu bei uns" slider controls (phones only; the slider itself is CSS scroll
+// snap): ‹ arrow, one dot per dish (the active dot is stretched), › arrow.
+// Auto loop: moves on every few seconds and wraps around. It pauses while the
+// slider is touched, hovered or focused, or off screen, and stops for good as
+// soon as someone uses the slider themselves. No auto loop with reduced motion.
+(function () {
+  var list = document.querySelector('.try-list');
+  if (!list) return;
+  var items = Array.prototype.slice.call(list.children);
+  var phone = window.matchMedia('(max-width: 760px)');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var DELAY = 5000;  // ms per dish
+  var active = 0;
+  var ticking = false;
+
+  var controls = document.createElement('div');
+  controls.className = 'try-controls';
+
+  function arrow(cls, label, step) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'try-arrow ' + cls;
+    b.setAttribute('aria-label', label);
+    b.addEventListener('click', function () {
+      stopAuto();
+      goTo(active + step);
+    });
+    return b;
+  }
+
+  var dots = document.createElement('div');
+  dots.className = 'try-dots';
+  var buttons = items.map(function (item, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Gericht ' + (i + 1) + ' von ' + items.length + ': ' + item.querySelector('h3').textContent);
+    b.addEventListener('click', function () {
+      stopAuto();
+      goTo(i);
+    });
+    dots.appendChild(b);
+    return b;
+  });
+
+  controls.appendChild(arrow('prev', 'Vorheriges Gericht', -1));
+  controls.appendChild(dots);
+  controls.appendChild(arrow('next', 'Nächstes Gericht', 1));
+  list.parentNode.insertBefore(controls, list.nextSibling);
+
+  // Slide to a dish (wrapping around at both ends). Only the row scrolls,
+  // never the page.
+  function goTo(i) {
+    var item = items[(i + items.length) % items.length];
+    var pad = parseFloat(getComputedStyle(list).scrollPaddingLeft) || 0;
+    var left = list.scrollLeft + item.getBoundingClientRect().left - list.getBoundingClientRect().left - pad;
+    list.scrollTo({ left: left, behavior: reduce.matches ? 'auto' : 'smooth' });
+  }
+
+  // Active = the card closest to the start of the row (the last one once the
+  // row can't scroll any further)
+  function update() {
+    ticking = false;
+    if (list.scrollLeft >= list.scrollWidth - list.clientWidth - 1) {
+      active = items.length - 1;
+    } else {
+      var start = list.getBoundingClientRect().left + (parseFloat(getComputedStyle(list).scrollPaddingLeft) || 0);
+      var best = Infinity;
+      items.forEach(function (item, i) {
+        var d = Math.abs(item.getBoundingClientRect().left - start);
+        if (d < best) { best = d; active = i; }
+      });
+    }
+    buttons.forEach(function (b, i) {
+      if (i === active) b.setAttribute('aria-current', 'true');
+      else b.removeAttribute('aria-current');
+    });
+  }
+
+  // Auto loop
+  var auto = true;      // false for good once someone uses the slider
+  var timer = null;
+  var onScreen = false;
+  var hovered = false;
+  var focused = false;
+
+  function sync() {
+    var run = auto && phone.matches && !reduce.matches && onScreen && !hovered && !focused && !document.hidden;
+    if (run && !timer) timer = setInterval(function () { goTo(active + 1); }, DELAY);
+    if (!run && timer) { clearInterval(timer); timer = null; }
+  }
+
+  function stopAuto() {
+    auto = false;
+    sync();
+  }
+
+  // Swiping, dragging, scrolling with the mouse wheel or arrow keys
+  ['pointerdown', 'wheel', 'keydown'].forEach(function (type) {
+    list.addEventListener(type, stopAuto, { passive: true });
+  });
+  [list, controls].forEach(function (el) {
+    el.addEventListener('mouseenter', function () { hovered = true; sync(); });
+    el.addEventListener('mouseleave', function () { hovered = false; sync(); });
+    el.addEventListener('focusin', function () { focused = true; sync(); });
+    el.addEventListener('focusout', function () { focused = false; sync(); });
+  });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      onScreen = entries[0].isIntersecting;
+      sync();
+    }, { threshold: .6 }).observe(list);
+  }
+  document.addEventListener('visibilitychange', sync);
+  phone.addEventListener('change', sync);
+  reduce.addEventListener('change', sync);
+
+  list.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
 // Menu: category tabs. "Hauptgerichte" shows all main courses; the arrow next
 // to it opens a filter by type.
 (function () {
@@ -268,6 +519,17 @@
     e.preventDefault();
     tablist.scrollLeft += e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
   }, { passive: false });
+
+  // Links elsewhere on the page that open a tab (e.g. "Alle Empfehlungen
+  // ansehen" in "Neu bei uns"); the jump to #karte itself happens as usual
+  document.querySelectorAll('a[data-tab]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      var tab = document.getElementById(link.dataset.tab);
+      if (!tab) return;
+      setPickerOpen(false);
+      selectTab(tab);
+    });
+  });
 
   // Switch from "everything in one list" to tabs
   tablist.hidden = false;

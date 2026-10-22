@@ -150,7 +150,6 @@ nav { --logo-full: 6.5rem; --logo-size: var(--logo-full); }
 nav ul { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
 nav a { text-decoration: none; font-weight: 500; }
 nav ul a { font-family: "Young Serif", Georgia, serif; font-weight: 400; font-size: 1.125rem; }   /* same font as the hero headline */
-nav a:hover { color: var(--gold); }
 
 /* Burger: assets/icons/Menu.svg inline (3 lines), animates into an ✕ */
 .burger {
@@ -304,6 +303,107 @@ nav .menu-extra { display: none; }
   .hero-art { display: none; }
 }
 
+/* "Back to top" bowl (built by js/main.js). Desktop/tablet: while scrolling,
+   the hero bowl flies into the bottom right corner and turns into the top view
+   (mohinga-top.svg). Phones, legal pages and reduced motion: the top view fades in. */
+.bowl-fly .hero-art { visibility: hidden; }   /* the button takes its place */
+
+.bowl-top {
+  position: fixed;
+  z-index: 30;                 /* below the mobile menu (40) and sticky bar (50) */
+  left: 0;
+  top: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  pointer-events: none;        /* only clickable once it sits in the corner */
+}
+.bowl-top.is-active { pointer-events: auto; cursor: pointer; }
+.bowl-top:focus-visible { outline-offset: 4px; }
+
+.bowl-top-art { position: absolute; inset: 0; display: block; }
+/* Drawn at the hero size and shrunk with a transform during the flight
+   (size + transform set by js/main.js; fade version: just fills the button) */
+.bowl-top-scale {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.bowl-top-art img { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Side view, or top view once .is-top is set (js/main.js, halfway through the
+   flight). The flip between them is a short timed animation, see below. */
+.bowl-top-art .top { opacity: 0; transform: scaleY(.12); }
+.bowl-top.is-top .side { opacity: 0; transform: scaleY(.12); }
+.bowl-top.is-top .top { opacity: 1; transform: none; }
+/* Shadow once the bowl sits in the corner (outside the shrinking layer, so it
+   keeps its size) */
+.bowl-top.is-active .bowl-top-art,
+.bowl-top.is-fade .bowl-top-art { filter: drop-shadow(0 6px 10px rgb(0 0 0 / .25)); }
+
+/* Up arrow above the bowl, shown once the bowl sits in the corner. The light
+   outline under the dark arrow keeps it visible on any background. */
+.bowl-top-arrow {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 4px);    /* the drawing has a little empty margin at the top */
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: -.75rem;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0;
+}
+.bowl-top.is-active .bowl-top-arrow { opacity: 1; }
+.bowl-top-arrow path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.bowl-top-arrow .halo { stroke: var(--bg); stroke-width: 5.5; }
+.bowl-top-arrow .line { stroke: var(--ink); stroke-width: 2.5; }
+
+/* Fade-in version: phones, legal pages, reduced motion */
+.bowl-top.is-fade {
+  left: auto;
+  top: auto;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  width: 4.25rem;
+  height: 4.25rem;
+  opacity: 0;
+  visibility: hidden;
+}
+.bowl-top.is-fade.is-active { opacity: 1; visibility: visible; }
+@media (min-width: 761px) {
+  .bowl-top.is-fade { right: 1.25rem; bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)); width: 5.25rem; height: 5.25rem; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bowl-top-art { transition: transform .3s cubic-bezier(.2, .8, .2, 1), filter .3s ease; }
+  /* Flip like the bowl tipping towards you: the visible view squashes flat
+     (.18s), then the other one unfolds from flat (.18s). Works both ways. */
+  .bowl-top-art .side { transition: transform .18s ease-out .18s, opacity 0s .18s; }
+  .bowl-top-art .top { transition: transform .18s ease-in, opacity 0s .18s; }
+  .bowl-top.is-top .side { transition: transform .18s ease-in, opacity 0s .18s; }
+  .bowl-top.is-top .top { transition: transform .18s ease-out .18s, opacity 0s .18s; }
+  .bowl-top-arrow { transition: opacity .25s ease; }
+  .bowl-top.is-fade { transform: translateY(.75rem) scale(.85); transition: opacity .25s ease, transform .3s cubic-bezier(.2, .8, .2, 1), visibility .25s; }
+  .bowl-top.is-fade.is-active { transform: none; }
+  /* The arrow hops up twice, then rests (2s loop) */
+  .bowl-top.is-active .bowl-top-arrow { animation: bowl-hop 2s ease-in-out infinite; }
+  @keyframes bowl-hop {
+    0%, 40%, 100% { transform: translateY(0); }
+    15% { transform: translateY(-6px); }
+    25% { transform: translateY(0); }
+    32% { transform: translateY(-3px); }
+  }
+  /* A little wobble on hover */
+  @media (hover: hover) {
+    .bowl-top.is-active:hover .bowl-top-art { transform: scale(1.08) rotate(-10deg); }
+  }
+}
+
 /* Über uns ----------------------------------------------------------------- */
 .about { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 3rem; align-items: start; }
 .about h2 { font-size: clamp(2rem, 4.5vw, 3rem); }
@@ -326,6 +426,107 @@ nav .menu-extra { display: none; }
 @media (max-width: 760px) {
   .about, .facts { grid-template-columns: 1fr; }
   .facts { margin-top: .5rem; }
+}
+
+/* Neu bei uns: four dishes for first-time guests --------------------------- */
+.try { padding-top: 0; }       /* follows straight on from Über uns (same background) */
+.try h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: .5rem; }
+.try .sub { color: var(--muted); margin: 0 0 2.5rem; max-width: 38rem; }
+.try-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);   /* big enough to see the food */
+  gap: 3rem 2.5rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+/* Same 4:3 shape for every photo (and the placeholder) */
+.try-list img,
+.try-list .photo-todo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+.try-list .photo-todo { display: grid; place-items: center; background: var(--surface); }
+.try-list h3 { font-size: 1.5rem; }
+.try-list p { margin: 0; }
+.try-list .de { font-weight: 600; margin: .2rem 0 .35rem; }
+.try-list .why { color: var(--muted); }
+.try .credits { font-size: .8rem; color: var(--muted); margin: 0 0 2rem; }
+.try .credits a { color: inherit; }
+.try .btn { display: block; width: fit-content; margin-inline: auto; }
+
+/* Phones: swipeable row instead of a long stack. Runs to the screen edges;
+   the next card peeks in so it's clear there's more. Pure CSS (scroll snap). */
+@media (max-width: 760px) {
+  .try-list {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    margin-inline: -1.5rem;          /* = .wrap padding */
+    padding: 0 1.5rem;
+    scroll-padding-inline: 1.5rem;
+    scrollbar-width: none;           /* the dots show the position instead */
+  }
+  .try-list::-webkit-scrollbar { display: none; }
+  .try-list li { flex: 0 0 min(80%, 20rem); scroll-snap-align: start; }
+}
+
+/* Slider controls (added by js/main.js, phones only): ‹ arrow, dots, › arrow.
+   Dot buttons are a bigger tap area; the visible dot is ::before. The active
+   dot stretches into a pill. */
+.try-controls { display: none; }
+@media (max-width: 760px) {
+  .try-controls { display: flex; align-items: center; justify-content: space-between; margin: 0 0 1rem; }
+}
+.try-dots { display: flex; justify-content: center; }
+.try-arrow {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+.try-arrow:hover { background: var(--surface); }
+/* Same caret as the Hauptgerichte filter arrow (.picker-toggle) */
+.try-arrow::before {
+  content: "";
+  width: .55rem;
+  height: .55rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+}
+.try-arrow.prev::before { transform: translateX(.12rem) rotate(135deg); }
+.try-arrow.next::before { transform: translateX(-.12rem) rotate(-45deg); }
+.try-dots button {
+  display: grid;
+  place-items: center;
+  height: 1.75rem;
+  padding: 0 .25rem;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.try-dots button::before {
+  content: "";
+  width: .5rem;
+  height: .5rem;
+  border-radius: 999px;
+  background: var(--muted);
+  transition: width .3s ease, background-color .3s ease;
+}
+.try-dots button[aria-current="true"]::before { width: 1.5rem; background: var(--jade); }
+@media (prefers-reduced-motion: reduce) {
+  .try-dots button::before { transition: none; }
 }
 
 /* Speisekarte -------------------------------------------------------------- */
@@ -604,7 +805,7 @@ nav .menu-extra { display: none; }
 .legal h2:first-child { margin-top: 0; }
 .legal p, .legal ul { margin: 0 0 1rem; }
 .legal ul { padding-left: 1.25rem; }
-.legal a { text-underline-offset: 3px; overflow-wrap: anywhere; }
+.legal a { overflow-wrap: anywhere; }   /* crayon underline: see "Crayon underline" */
 .legal .updated { margin-top: 2.5rem; color: var(--muted); font-size: .95rem; }
 
 /* Temporary: marks placeholder content that still needs real data */
@@ -613,9 +814,55 @@ nav .menu-extra { display: none; }
 /* Footer ------------------------------------------------------------------- */
 footer { border-top: 1px solid var(--line); padding: 2rem 0; color: var(--muted); font-size: .95rem; }
 footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
-footer a { text-underline-offset: 3px; }
 footer a:hover { color: var(--ink); }
 footer a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+
+/* Crayon underline ---------------------------------------------------------- */
+/* A gold wax crayon stroke (same filter idea as the drawings: wobble + grain)
+   instead of the plain underline. It's a small SVG image that repeats
+   sideways, so links that wrap onto two lines get a stroke on each line.
+   Gold is the same in light and dark mode. */
+:root {
+  --crayon-line: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='8' viewBox='0 0 120 8'%3E%3Cfilter id='w' x='-5%25' y='-60%25' width='110%25' height='220%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.06' numOctaves='2' seed='25' result='warp'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='warp' scale='2.5' xChannelSelector='R' yChannelSelector='G' result='wobbly'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8 0.3' numOctaves='3' seed='26' result='grain'/%3E%3CfeColorMatrix in='grain' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3.2 0 0 0 2.6' result='mask'/%3E%3CfeComposite in='wobbly' in2='mask' operator='in'/%3E%3C/filter%3E%3Cpath d='M-4 4.5 C20 3.2 40 5.6 62 4 S100 3.4 124 4.5' fill='none' stroke='%23E3A512' stroke-width='3' filter='url(%23w)'/%3E%3C/svg%3E");
+}
+.legal a,
+footer a,
+.try .credits a {
+  text-decoration: none;
+  padding-bottom: .35em;             /* gap between text and stroke */
+  background: var(--crayon-line) left bottom / 120px 8px repeat-x;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+/* Nav links: on hover and keyboard focus the stroke draws itself in from left
+   to right, and rubs out back to the left when the pointer leaves. The stroke
+   stays put; only a clip reveals it. Desktop only; on phones/tablets the links
+   are the full-screen menu (no hover there). */
+@media (min-width: 1025px) {
+  nav ul a:not(.btn) { position: relative; padding-bottom: .5em; color: #fff; }   /* gap between text and stroke; white like the logo */
+  nav ul a:not(.btn)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 8px;
+    background: var(--crayon-line) left bottom / 120px 8px repeat-x;
+    clip-path: inset(0 100% 0 0);
+    pointer-events: none;
+  }
+  nav ul a:not(.btn):hover::after,
+  nav ul a:not(.btn):focus-visible::after { clip-path: inset(0); }
+  /* Text warms from white to cream (cream on red still has enough contrast) */
+  nav ul a:not(.btn):hover,
+  nav ul a:not(.btn):focus-visible { color: var(--jade-ink); }
+}
+@media (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
+  nav ul a:not(.btn) { transition: color .2s ease; }
+  nav ul a:not(.btn)::after { transition: clip-path .2s ease-in; }                      /* rub out */
+  nav ul a:not(.btn):hover::after,
+  nav ul a:not(.btn):focus-visible::after { transition: clip-path .4s cubic-bezier(.3, .7, .3, 1); }  /* draw in */
+}
 
 /* Reduced motion ----------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {

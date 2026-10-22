@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Mohinga seen from above (pair of mohinga.svg). Same crayon filter + hatch. -->
+  <defs>
+    <filter id="wax" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="5" xChannelSelector="R" yChannelSelector="G" result="wobbly"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="9" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 2.5" result="mask"/>
+      <feComposite in="wobbly" in2="mask" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#3B2416" stroke-opacity=".16" stroke-width="2.6"/>
+    </pattern>
+    <clipPath id="broth"><circle cx="200" cy="200" r="136"/></clipPath>
+  </defs>
+
+  <g filter="url(#wax)" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- shadow -->
+    <circle cx="208" cy="210" r="172" fill="#3B2416" opacity=".18"/>
+
+    <!-- rim with blue line and dots -->
+    <circle cx="200" cy="200" r="168" fill="#EFE5D2"/>
+    <circle cx="200" cy="200" r="168" fill="url(#hatch)"/>
+    <circle cx="200" cy="200" r="158" fill="none" stroke="#3E6FA8" stroke-width="5"/>
+    <g fill="#3E6FA8">
+      <circle cx="349" cy="200" r="3.5"/><circle cx="329" cy="275" r="3.5"/><circle cx="275" cy="329" r="3.5"/>
+      <circle cx="200" cy="349" r="3.5"/><circle cx="125" cy="329" r="3.5"/><circle cx="71" cy="275" r="3.5"/>
+      <circle cx="51" cy="200" r="3.5"/><circle cx="71" cy="125" r="3.5"/><circle cx="125" cy="71" r="3.5"/>
+      <circle cx="200" cy="51" r="3.5"/><circle cx="275" cy="71" r="3.5"/><circle cx="329" cy="125" r="3.5"/>
+    </g>
+    <circle cx="200" cy="200" r="168" fill="none" stroke="#4A3426" stroke-width="4"/>
+
+    <!-- broth -->
+    <circle cx="200" cy="200" r="138" fill="#D88A2E" stroke="#4A3426" stroke-width="3"/>
+    <circle cx="200" cy="200" r="138" fill="url(#hatch)"/>
+    <g clip-path="url(#broth)">
+      <!-- darker broth swirls -->
+      <g fill="none" stroke="#B5651D" stroke-width="5" opacity=".7">
+        <path d="M90 150 c30 -30 80 -30 110 -6"/>
+        <path d="M240 300 c40 -6 70 -36 76 -70"/>
+        <path d="M86 250 c20 30 60 44 96 36"/>
+      </g>
+      <!-- rice noodles -->
+      <g fill="none" stroke="#FBF5E8" stroke-width="4.5">
+        <path d="M60 170 c15 -14 30 14 45 0 s30 14 45 0 s30 14 45 0 s30 14 45 0 s30 14 45 0 s30 14 45 0"/>
+        <path d="M60 205 c15 -12 30 12 45 0 s30 12 45 0 s30 12 45 0 s30 12 45 0 s30 12 45 0 s30 12 45 0"/>
+        <path d="M80 240 c12 -10 24 10 36 0 s24 10 36 0 s24 10 36 0 s24 10 36 0 s24 10 36 0 s24 10 36 0"/>
+        <path d="M100 135 c12 -10 24 10 36 0 s24 10 36 0 s24 10 36 0 s24 10 36 0"/>
+        <path d="M110 275 c12 -10 24 10 36 0 s24 10 36 0 s24 10 36 0 s24 10 36 0"/>
+      </g>
+      <!-- chili flakes -->
+      <g fill="#C0392B">
+        <circle cx="120" cy="120" r="3"/><circle cx="176" cy="260" r="3"/><circle cx="290" cy="240" r="3"/>
+        <circle cx="300" cy="150" r="3"/><circle cx="215" cy="110" r="3"/><circle cx="95" cy="215" r="3"/>
+        <circle cx="240" cy="190" r="3"/><circle cx="150" cy="300" r="3"/>
+      </g>
+    </g>
+
+    <!-- boiled egg halves -->
+    <g stroke="#4A3426" stroke-width="3">
+      <circle cx="158" cy="160" r="27" fill="#FFFDF6"/>
+      <circle cx="244" cy="238" r="25" fill="#FFFDF6"/>
+    </g>
+    <circle cx="158" cy="160" r="12" fill="#F2B632"/>
+    <circle cx="244" cy="238" r="11" fill="#F2B632"/>
+
+    <!-- split pea fritters (akyaw) -->
+    <g stroke="#4A3426" stroke-width="3" fill="#C98A3A">
+      <path d="M254 128 q14 -18 36 -10 q18 8 12 26 q-8 16 -30 12 q-24 -4 -18 -28z"/>
+      <path d="M112 248 q12 -18 32 -12 q16 6 12 22 q-6 14 -26 10 q-22 -4 -18 -20z"/>
+    </g>
+    <g fill="#7A4A1E">
+      <circle cx="272" cy="130" r="2.5"/><circle cx="286" cy="140" r="2.5"/><circle cx="268" cy="146" r="2.5"/>
+      <circle cx="128" cy="250" r="2.5"/><circle cx="142" cy="258" r="2.5"/>
+    </g>
+
+    <!-- coriander -->
+    <g fill="#4E9A4B">
+      <path d="M196 196 q8 -12 16 0 q-8 8 -16 0z"/>
+      <path d="M206 208 q10 -6 14 6 q-10 4 -14 -6z"/>
+      <path d="M110 180 q8 -12 16 0 q-8 8 -16 0z"/>
+      <path d="M286 196 q8 -12 16 0 q-8 8 -16 0z"/>
+      <path d="M296 208 q10 -6 14 6 q-10 4 -14 -6z"/>
+      <path d="M190 292 q8 -10 14 0 q-8 6 -14 0z"/>
+      <path d="M200 132 q8 -10 14 0 q-8 6 -14 0z"/>
+    </g>
+
+    <!-- lime wedge hooked on the rim, top right (flat side towards the middle) -->
+    <g transform="translate(317 83) rotate(45)">
+      <path d="M-26 0 A26 26 0 0 1 26 0 Z" fill="#9BC53D" stroke="#4A3426" stroke-width="3"/>
+      <path d="M-20 -3 A20 20 0 0 1 20 -3 Z" fill="#D9EC8C"/>
+    </g>
+  </g>
+</svg>

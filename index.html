@@ -27,6 +27,53 @@
 			crossorigin
 		/>
 		<link rel="stylesheet" href="css/styles.css" />
+
+		<!-- Tab icon: the header logo on red (white on a light tab would vanish) -->
+		<link rel="icon" type="image/png" sizes="48x48" href="assets/icons/favicon-48.png" />
+		<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/favicon-192.png" />
+		<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+		<meta name="theme-color" content="#C23A1E" />
+
+		<!-- Share preview (WhatsApp, Facebook …). TODO once the domain is known,
+		     add these (they need full addresses, replace DOMAIN):
+		     <meta property="og:url" content="https://DOMAIN/" />
+		     <meta property="og:image" content="https://DOMAIN/assets/images/share-mandalay.jpg" />
+		     <meta property="og:image:width" content="1200" />
+		     <meta property="og:image:height" content="630" />
+		     <meta property="og:image:alt" content="Gastraum des Restaurant Mandalay mit burmesischen Bildern und gedeckten Tischen" />
+		     (share-mandalay.jpg = assets/images/shared image/Innenraum.jpg cropped to 1200×630) -->
+		<meta property="og:type" content="restaurant" />
+		<meta property="og:locale" content="de_DE" />
+		<meta property="og:site_name" content="Restaurant Mandalay" />
+		<meta property="og:title" content="Restaurant Mandalay – Burmesische Küche in Köln" />
+		<meta
+			property="og:description"
+			content="Das einzige burmesische Restaurant in Köln. Seit über 40 Jahren familiengeführt."
+		/>
+		<meta name="twitter:card" content="summary_large_image" />
+
+		<!-- Restaurant details for search engines (schema.org). TODO: add
+		     "openingHoursSpecification" once the hours are confirmed, and
+		     "url", "image", "hasMenu" once the domain is known. -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Restaurant",
+				"name": "Restaurant Mandalay",
+				"description": "Das einzige burmesische Restaurant in Köln. Seit über 40 Jahren familiengeführt.",
+				"servesCuisine": ["Burmesisch", "Burmese"],
+				"priceRange": "€",
+				"telephone": "+49 221 5101296",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Brüsseler Str. 53",
+					"postalCode": "50674",
+					"addressLocality": "Köln",
+					"addressCountry": "DE"
+				},
+				"acceptsReservations": "https://www.opentable.de/restref/client/?rid=516183&restref=516183&lang=de-DE"
+			}
+		</script>
 	</head>
 	<body>
 		<header class="hero">
@@ -124,6 +171,58 @@
 							>
 						</li>
 					</ul>
+				</div>
+			</section>
+
+			<!-- Four dishes for first-time guests (all from "Empfehlungen"; names
+			     spelled as on the menu so guests find them there).
+			     TODO before launch: the photos are stand-ins from Wikimedia Commons
+			     (other cooks' versions of the dishes) – replace them with our own
+			     photos (1200×900, 4:3) and remove the credit line below. -->
+			<section class="try" aria-labelledby="try-title">
+				<div class="wrap">
+					<h2 id="try-title">Neu bei uns?</h2>
+					<p class="sub">
+						Burmas Küche liegt zwischen Indien, China und Thailand und
+						schmeckt doch ganz eigen. Vier Klassiker für den Anfang:
+					</p>
+					<!-- On phones this is a swipeable row; tabindex lets keyboard users scroll it -->
+					<ul class="try-list" tabindex="0" aria-label="Gerichte zum Kennenlernen">
+						<li>
+							<img src="assets/images/dishes/mohinga.jpg" alt="Reisnudeln in orangefarbener Fischbrühe mit gekochtem Ei und Koriander" width="800" height="600" loading="lazy" />
+							<h3>Mont Hin Ga</h3>
+							<p class="de">Fischsuppe mit Reisnudeln</p>
+							<p class="why">Burmas Nationalgericht. In Myanmar isst man die würzige Brühe am liebsten zum Frühstück.</p>
+						</li>
+						<li>
+							<img src="assets/images/dishes/ohn-noh-kaukswe.jpg" alt="Teller mit Nudeln in Kokosbrühe, Hühnerfleisch, Ei und getrockneter Chili" width="800" height="600" loading="lazy" />
+							<h3>Ohn Noh Kaukswe</h3>
+							<p class="de">Kokossuppe mit Hühnerfleisch und Nudeln</p>
+							<p class="why">Nudeln in cremiger Kokosbrühe. Ein Klassiker der burmesischen Küche.</p>
+						</li>
+						<li>
+							<img src="assets/images/dishes/lape-thou.jpg" alt="Salat aus fermentierten Teeblättern mit Tomate, Kohl und Sesam" width="800" height="600" loading="lazy" />
+							<h3>Lape’ Thou’</h3>
+							<p class="de">Teeblätter-Salat, hausgemacht</p>
+							<p class="why">In Burma wird Tee nicht nur getrunken, sondern auch gegessen: als Salat aus fermentierten Teeblättern.</p>
+						</li>
+						<li>
+							<!-- TODO: no free photo of Gjin Thou' exists – take our own -->
+							<div class="photo-todo"><span class="todo">Foto folgt</span></div>
+							<h3>Gjin Thou’</h3>
+							<p class="de">Ingwer-Salat, hausgemacht</p>
+							<p class="why">Fein geschnittener Ingwer mit gerösteten Bohnen, Erdnüssen und Sesam: frisch, scharf und knusprig.</p>
+						</li>
+					</ul>
+					<p class="credits">
+						Fotos:
+						Junosang (<a href="https://commons.wikimedia.org/wiki/File:Mohinga_bowl.jpg">CC0</a>),
+						Rajdeep Das (<a href="https://commons.wikimedia.org/wiki/File:Ohn_No_Khao_Sw%C3%A8.jpg">CC BY-SA 4.0</a>),
+						Charles Haynes (<a href="https://commons.wikimedia.org/wiki/File:Fermented_Tea_Leaf_Salad_(9319609945).jpg">CC BY-SA 2.0</a>),
+						via Wikimedia Commons, zugeschnitten.
+					</p>
+					<!-- js/main.js opens the "Empfehlungen" tab on click -->
+					<a class="btn primary" href="#karte" data-tab="tab-empfehlungen">Alle Empfehlungen ansehen</a>
 				</div>
 			</section>
 
