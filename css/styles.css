@@ -822,7 +822,6 @@ footer p { margin: 0; }
   align-items: start;
   padding-bottom: 2.5rem;
 }
-.footer-logo { display: block; width: 5rem; height: auto; margin-bottom: 1rem; }
 .footer-thanks { font-family: "Noto Sans Myanmar", sans-serif; font-weight: 500; font-size: 1.15rem; margin-bottom: .25rem; }
 .footer-invite { font-family: "Young Serif", Georgia, serif; font-size: 1.5rem; line-height: 1.2; }
 .footer-label { font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin: .35rem 0 .6rem; }
@@ -836,8 +835,8 @@ footer p { margin: 0; }
   /* thin line, as wide as the content (the .wrap padding is 1.5rem each side) */
   background: linear-gradient(color-mix(in srgb, var(--jade-ink) 30%, transparent), color-mix(in srgb, var(--jade-ink) 30%, transparent)) center top / calc(100% - 3rem) 1px no-repeat;
 }
-footer a:hover { color: #fff; }
-footer a[aria-current="page"] { color: #fff; font-weight: 600; }
+footer a[aria-current="page"] { font-weight: 600; }
+/* Footer links: white, crayon line only on hover/focus (see "Crayon underline") */
 @media (max-width: 900px) {
   .footer-main { grid-template-columns: repeat(3, 1fr); }
   .footer-hello { grid-column: 1 / -1; }
@@ -855,10 +854,9 @@ footer a[aria-current="page"] { color: #fff; font-weight: 600; }
   --crayon-line: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='8' viewBox='0 0 120 8'%3E%3Cfilter id='w' x='-5%25' y='-60%25' width='110%25' height='220%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.06' numOctaves='2' seed='25' result='warp'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='warp' scale='2.5' xChannelSelector='R' yChannelSelector='G' result='wobbly'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8 0.3' numOctaves='3' seed='26' result='grain'/%3E%3CfeColorMatrix in='grain' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3.2 0 0 0 2.6' result='mask'/%3E%3CfeComposite in='wobbly' in2='mask' operator='in'/%3E%3C/filter%3E%3Cpath d='M-4 4.5 C20 3.2 40 5.6 62 4 S100 3.4 124 4.5' fill='none' stroke='%23E3A512' stroke-width='3' filter='url(%23w)'/%3E%3C/svg%3E");
 }
 .legal a,
-footer a,
 .try .credits a {
   text-decoration: none;
-  padding-bottom: .35em;             /* gap between text and stroke */
+  padding-bottom: .5em;              /* gap between text and stroke */
   background: var(--crayon-line) left bottom / 120px 8px repeat-x;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -868,7 +866,7 @@ footer a,
    stays put; only a clip reveals it. Desktop only; on phones/tablets the links
    are the full-screen menu (no hover there). */
 @media (min-width: 1025px) {
-  nav ul a:not(.btn) { position: relative; padding-bottom: .5em; color: #fff; }   /* gap between text and stroke; white like the logo */
+  nav ul a:not(.btn) { position: relative; padding-bottom: .65em; color: #fff; }   /* gap between text and stroke; white like the logo */
   nav ul a:not(.btn)::after {
     content: "";
     position: absolute;
@@ -891,6 +889,33 @@ footer a,
   nav ul a:not(.btn)::after { transition: clip-path .2s ease-in; }                      /* rub out */
   nav ul a:not(.btn):hover::after,
   nav ul a:not(.btn):focus-visible::after { transition: clip-path .4s cubic-bezier(.3, .7, .3, 1); }  /* draw in */
+}
+
+/* Footer links: white, no line; on hover/focus the text warms to cream and
+   the stroke draws in like in the nav. The link to the current page (legal
+   pages) keeps its line. */
+footer a { position: relative; padding-bottom: .6em; color: #fff; text-decoration: none; }   /* gap between text and stroke */
+footer a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  background: var(--crayon-line) left bottom / 120px 8px repeat-x;
+  clip-path: inset(0 100% 0 0);
+  pointer-events: none;
+}
+footer a:hover,
+footer a:focus-visible { color: var(--jade-ink); }
+footer a:hover::after,
+footer a:focus-visible::after,
+footer a[aria-current="page"]::after { clip-path: inset(0); }
+@media (prefers-reduced-motion: no-preference) {
+  footer a { transition: color .2s ease; }
+  footer a::after { transition: clip-path .2s ease-in; }                      /* rub out */
+  footer a:hover::after,
+  footer a:focus-visible::after { transition: clip-path .4s cubic-bezier(.3, .7, .3, 1); }  /* draw in */
 }
 
 /* Reduced motion ----------------------------------------------------------- */
