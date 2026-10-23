@@ -822,7 +822,6 @@ footer p { margin: 0; }
   align-items: start;
   padding-bottom: 2.5rem;
 }
-.footer-thanks { font-family: "Noto Sans Myanmar", sans-serif; font-weight: 500; font-size: 1.15rem; margin-bottom: .25rem; }
 .footer-invite { font-family: "Young Serif", Georgia, serif; font-size: 1.5rem; line-height: 1.2; }
 .footer-label { font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin: .35rem 0 .6rem; }
 .footer-col p + p { margin-top: .4rem; }
@@ -856,7 +855,7 @@ footer a[aria-current="page"] { font-weight: 600; }
 .legal a,
 .try .credits a {
   text-decoration: none;
-  padding-bottom: .5em;              /* gap between text and stroke */
+  padding-bottom: .6em;              /* gap between text and stroke */
   background: var(--crayon-line) left bottom / 120px 8px repeat-x;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -866,7 +865,7 @@ footer a[aria-current="page"] { font-weight: 600; }
    stays put; only a clip reveals it. Desktop only; on phones/tablets the links
    are the full-screen menu (no hover there). */
 @media (min-width: 1025px) {
-  nav ul a:not(.btn) { position: relative; padding-bottom: .65em; color: #fff; }   /* gap between text and stroke; white like the logo */
+  nav ul a:not(.btn) { position: relative; padding-bottom: .8em; color: #fff; }   /* gap between text and stroke; white like the logo */
   nav ul a:not(.btn)::after {
     content: "";
     position: absolute;
@@ -894,7 +893,7 @@ footer a[aria-current="page"] { font-weight: 600; }
 /* Footer links: white, no line; on hover/focus the text warms to cream and
    the stroke draws in like in the nav. The link to the current page (legal
    pages) keeps its line. */
-footer a { position: relative; padding-bottom: .6em; color: #fff; text-decoration: none; }   /* gap between text and stroke */
+footer a { position: relative; padding-bottom: .75em; color: #fff; text-decoration: none; }   /* gap between text and stroke */
 footer a::after {
   content: "";
   position: absolute;
