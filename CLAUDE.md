@@ -76,6 +76,7 @@ One-page website for **Mandalay**, a family-run Burmese restaurant in Köln, own
 - "Neu bei uns" texts are drafts: have the family check them.
 - "Neu bei uns" photos (Mohinga, Ohn Noh Kaukswe, Lape' Thou') are free stand-ins from Wikimedia Commons (credit line under the cards, required by CC BY-SA). Gjin Thou' (ginger salad) has a "Foto folgt" placeholder because no free photo exists. Replace all with the restaurant's own photos (1200×900, 4:3, same angle and light), then delete the credit line.
 - Hosting/domain not decided.
+- **Preview on GitHub Pages** (since 2026-10-23): https://thureinthu.github.io/restaurant-mandalay/ updates automatically ~1–2 min after each push. All 3 pages have `<meta name="robots" content="noindex">` (marked TODO) so search engines skip the unfinished site: **remove it at launch**. Share the link with family only until Impressum/Datenschutz are final.
 - The family's old website may still run Google Analytics with an outdated privacy text, which is a legal risk until it's taken down or fixed.
 
 ## Current status (update at the end of each session)
