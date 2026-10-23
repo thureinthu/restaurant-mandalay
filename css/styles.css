@@ -440,9 +440,8 @@ nav .menu-extra { display: none; }
   padding: 0;
   list-style: none;
 }
-/* Same 4:3 shape for every photo (and the placeholder) */
-.try-list img,
-.try-list .photo-todo {
+/* Same 4:3 shape for every photo */
+.try-list img {
   display: block;
   width: 100%;
   height: auto;
@@ -450,7 +449,6 @@ nav .menu-extra { display: none; }
   object-fit: cover;
   margin-bottom: 1rem;
 }
-.try-list .photo-todo { display: grid; place-items: center; background: var(--surface); }
 .try-list h3 { font-size: 1.5rem; }
 .try-list p { margin: 0; }
 .try-list .de { font-weight: 600; margin: .2rem 0 .35rem; }
@@ -812,10 +810,41 @@ nav .menu-extra { display: none; }
 .todo { background: var(--gold); color: #1E2A26; padding: 0 .3em; border-radius: 3px; }
 
 /* Footer ------------------------------------------------------------------- */
-footer { border-top: 1px solid var(--line); padding: 2rem 0; color: var(--muted); font-size: .95rem; }
-footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
-footer a:hover { color: var(--ink); }
-footer a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+/* Red like the hero, so the page opens and closes in the restaurant's colour:
+   a warm goodbye (logo, Burmese "thank you", invitation), address, contact,
+   visit links, then a thin line and the legal row. Same on all 3 pages. */
+footer { background: var(--jade); color: var(--jade-ink); padding: 3.5rem 0 1.5rem; font-size: .95rem; }
+footer p { margin: 0; }
+.footer-main {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(3, 1fr);
+  gap: 2rem 3rem;
+  align-items: start;
+  padding-bottom: 2.5rem;
+}
+.footer-logo { display: block; width: 5rem; height: auto; margin-bottom: 1rem; }
+.footer-thanks { font-family: "Noto Sans Myanmar", sans-serif; font-weight: 500; font-size: 1.15rem; margin-bottom: .25rem; }
+.footer-invite { font-family: "Young Serif", Georgia, serif; font-size: 1.5rem; line-height: 1.2; }
+.footer-label { font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin: .35rem 0 .6rem; }
+.footer-col p + p { margin-top: .4rem; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem 1.5rem;
+  padding-top: 1.25rem;
+  /* thin line, as wide as the content (the .wrap padding is 1.5rem each side) */
+  background: linear-gradient(color-mix(in srgb, var(--jade-ink) 30%, transparent), color-mix(in srgb, var(--jade-ink) 30%, transparent)) center top / calc(100% - 3rem) 1px no-repeat;
+}
+footer a:hover { color: #fff; }
+footer a[aria-current="page"] { color: #fff; font-weight: 600; }
+@media (max-width: 900px) {
+  .footer-main { grid-template-columns: repeat(3, 1fr); }
+  .footer-hello { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .footer-main { grid-template-columns: 1fr; gap: 1.75rem; }
+}
 
 /* Crayon underline ---------------------------------------------------------- */
 /* A gold wax crayon stroke (same filter idea as the drawings: wobble + grain)
