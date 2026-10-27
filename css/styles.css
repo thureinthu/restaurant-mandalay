@@ -428,7 +428,7 @@ nav .menu-extra { display: none; }
   .facts { margin-top: .5rem; }
 }
 
-/* Neu bei uns: four dishes for first-time guests --------------------------- */
+/* Neu bei uns: six dishes for first-time guests ---------------------------- */
 .try { padding-top: 0; }       /* follows straight on from Über uns (same background) */
 .try h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: .5rem; }
 .try .sub { color: var(--muted); margin: 0 0 2.5rem; max-width: 38rem; }
